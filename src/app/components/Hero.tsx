@@ -256,7 +256,7 @@ export function Hero() {
 
         {/* Scroll indicator with micro-interaction */}
         <Reveal delay={300}>
-          <div className="mt-12 sm:mt-20 flex flex-col items-center gap-3 animate-bounce" style={{ animationDuration: '2s' }}>
+          <div className="mt-8 sm:mt-20 flex flex-col items-center gap-3 animate-bounce" style={{ animationDuration: '2s' }}>
 
           </div>
         </Reveal>

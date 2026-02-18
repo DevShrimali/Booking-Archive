@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Menu, User, ChevronDown, MapPin, CreditCard, LogOut, Heart, Briefcase, Globe, HelpCircle, Tag } from 'lucide-react';
 import { Button } from './ui/button';
+import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { clsx } from 'clsx';
 
 const NAVIGATION_ITEMS = {
@@ -182,9 +183,58 @@ export function Navbar() {
             </div>
           </div>
 
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <Menu className="w-5 h-5" />
-          </Button>
+          {/* Mobile Menu */}
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="w-5 h-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] overflow-y-auto">
+                <div className="flex flex-col gap-8 mt-8">
+                  <div className="font-sans font-bold text-lg tracking-tighter uppercase text-black">
+                    Archive<span className="text-gray-400 font-normal">.Travel</span>
+                  </div>
+
+                  <nav className="flex flex-col gap-6">
+                    {Object.keys(NAVIGATION_ITEMS).map((item) => (
+                      <div key={item} className="space-y-3">
+                        <div className="text-sm font-bold uppercase tracking-widest text-black border-b border-gray-100 pb-2">
+                          {item}
+                        </div>
+                        <div className="flex flex-col gap-2 pl-4">
+                          {NAVIGATION_ITEMS[item as keyof typeof NAVIGATION_ITEMS].items.map((link) => (
+                            <a key={link.label} href="#" className="text-sm text-gray-500 hover:text-black transition-colors block py-1">
+                              {link.label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+
+                    <div className="space-y-3 pt-4 border-t border-gray-100">
+                      <a href="#" className="block text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-black">
+                        Offers
+                      </a>
+                      <a href="#" className="block text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-black">
+                        Support
+                      </a>
+                      <a href="#" className="block text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-black">
+                        My Trips
+                      </a>
+                    </div>
+
+                    <div className="pt-4">
+                      <button className="w-full py-3 text-xs font-bold bg-black text-white rounded-lg hover:bg-gray-900 transition-colors tracking-wide uppercase">
+                        Login / Sign Up
+                      </button>
+                    </div>
+                  </nav>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
 
       </div>

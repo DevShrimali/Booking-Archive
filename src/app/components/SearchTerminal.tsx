@@ -143,7 +143,7 @@ export function SearchTerminal() {
                         }}
                         onFocus={() => setShowOriginDropdown(true)}
                         placeholder="Origin City"
-                        className="w-full bg-transparent font-bold text-lg text-black focus:outline-none placeholder:text-gray-300 truncate"
+                        className="w-full bg-transparent font-bold text-base sm:text-lg text-black focus:outline-none placeholder:text-gray-300 truncate"
                       />
                     </div>
 
