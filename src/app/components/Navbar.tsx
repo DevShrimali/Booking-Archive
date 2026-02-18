@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Menu, User, ChevronDown, MapPin, CreditCard, LogOut, Heart, Briefcase, Globe, HelpCircle, Tag } from 'lucide-react';
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 import { clsx } from 'clsx';
 
 const NAVIGATION_ITEMS = {
