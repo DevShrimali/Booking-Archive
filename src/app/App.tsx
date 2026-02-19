@@ -43,13 +43,13 @@ function App() {
 
 
 
-        {/* 8. Inspiration Grid */}
+        {/* 7. Inspiration Grid */}
         <CommunityGrid />
 
-        {/* 9. Testimonials */}
+        {/* 8. Testimonials */}
         <Testimonials />
 
-        {/* 10. App Download */}
+        {/* 9. App Download */}
         <AppDownload />
 
         {/* 10. Newsletter */}

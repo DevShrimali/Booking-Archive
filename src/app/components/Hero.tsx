@@ -6,41 +6,41 @@ import { LetterReveal } from './ui/LetterReveal';
 const cards = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-    title: "Neo Paris",
-    handle: "@future_paris",
+    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800&auto=format&fit=crop",
+    title: "Paris",
+    handle: "@city_lights",
     rotation: "-rotate-6",
     zIndex: "z-10"
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1535958636474-b021ee887b13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-    title: "Cyber Tokyo",
-    handle: "@neon_dreams",
+    image: "https://images.unsplash.com/photo-1540959375944-7049f642e9e1?q=80&w=800&auto=format&fit=crop",
+    title: "Tokyo",
+    handle: "@temple_gardens",
     rotation: "-rotate-3",
     zIndex: "z-20"
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-    title: "Zen Alps",
-    handle: "@arctic_design",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop",
+    title: "Swiss Alps",
+    handle: "@mountain_peaks",
     rotation: "rotate-0",
     zIndex: "z-30"
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-    title: "Dream Amalfi",
-    handle: "@surreal_italy",
+    image: "https://images.unsplash.com/photo-1599995577558-3c2ca7ac3d37?q=80&w=800&auto=format&fit=crop",
+    title: "Amalfi Coast",
+    handle: "@coastal_beauty",
     rotation: "rotate-3",
     zIndex: "z-20"
   },
   {
     id: 5,
-    image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-    title: "Utopian NYC",
-    handle: "@sky_architects",
+    image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=800&auto=format&fit=crop",
+    title: "New York",
+    handle: "@city_energy",
     rotation: "rotate-6",
     zIndex: "z-10"
   },
@@ -88,7 +88,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-[#FDFDFD]">
+    <section className="relative min-h-[80vh] md:min-h-screen w-full flex flex-col items-center justify-center pt-24 md:pt-32 pb-10 md:pb-20 overflow-hidden bg-[#FDFDFD]">
 
       {/* Aurora Gradient Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -130,22 +130,22 @@ export function Hero() {
       <div className="absolute inset-0 pointer-events-none hidden xl:block z-0 overflow-hidden">
         {/* Left Top - Adventure */}
         <div className="absolute top-[13%] left-[4%] w-48 h-64 shadow-2xl rotate-[-6deg] rounded-2xl overflow-hidden border-4 border-white bg-white animate-float z-99" style={{ '--rot': '-6deg', animationDelay: '0s' } as any}>
-          <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Travel Adventure" />
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Travel Adventure" loading="lazy" />
         </div>
 
         {/* Left Bottom - Map/Planning */}
         <div className="absolute top-[28%] left-[-1%] w-44 h-42 shadow-xl rotate-[4deg] rounded-xl overflow-hidden border-4 border-white bg-white animate-float " style={{ '--rot': '4deg', animationDelay: '2s' } as any}>
-          <img src="https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Travel Map" />
+          <img src="https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Travel Map" loading="lazy" />
         </div>
 
         {/* Right Top - Relaxation/Resort */}
         <div className="absolute top-[12%] right-[5%] w-56 h-72 shadow-2xl rotate-[5deg] rounded-2xl overflow-hidden border-4 border-white bg-white animate-float z-99" style={{ '--rot': '5deg', animationDelay: '1s' } as any}>
-          <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Relaxation" />
+          <img src="https://images.unsplash.com/photo-1571896349842-b4dc9e24e110?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Luxury Resort" loading="lazy" />
         </div>
 
         {/* Right Bottom - Urban/Culture */}
         <div className="absolute top-[20%] right-[-1%] w-44 h-60 shadow-xl rotate-[-3deg] rounded-xl overflow-hidden border-4 border-white bg-white animate-float" style={{ '--rot': '-3deg', animationDelay: '3s' } as any}>
-          <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Urban Culture" />
+          <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Urban Culture" loading="lazy" />
         </div>
       </div>
 
@@ -160,7 +160,7 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={100}>
-          <h1 className="font-sans font-extrabold text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter text-black mb-6 flex flex-col items-center">
+          <h1 className="font-sans font-extrabold text-[14vw] sm:text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter text-black mb-4 md:mb-6 flex flex-col items-center">
             <div className="overflow-hidden">
               <LetterReveal text="DISCOVER " stagger={50} />
             </div>
@@ -169,7 +169,7 @@ export function Hero() {
                 text="Extraordinary "
                 delay={400}
                 stagger={50}
-                className="font-serif italic font-normal text-6xl sm:text-7xl md:text-9xl text-gray-400 pb-4"
+                className="font-serif italic font-normal text-[14vw] sm:text-7xl md:text-9xl text-gray-400 pb-2 md:pb-4"
               />
             </div>
           </h1>
@@ -179,7 +179,7 @@ export function Hero() {
 
         {/* Loading State */}
         {!imagesLoaded && (
-          <div className="relative h-[400px] sm:h-[500px] w-full max-w-4xl mx-auto flex justify-center items-center">
+          <div className="relative h-[280px] sm:h-[500px] w-full max-w-4xl mx-auto flex justify-center items-center">
             <div className="flex flex-col items-center gap-4">
               <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
               <p className="text-sm text-gray-500 font-medium">Loading destinations...</p>
@@ -189,7 +189,7 @@ export function Hero() {
 
         {/* The Card Fan Stack */}
         <div
-          className={`relative h-[400px] sm:h-[500px] w-full max-w-4xl mx-auto flex justify-center items-center group perspective-1000 transition-opacity duration-300 ${imagesLoaded ? 'opacity-100' : 'opacity-0 absolute'}`}
+          className={`relative h-[280px] sm:h-[500px] w-full max-w-4xl mx-auto flex justify-center items-center group perspective-1000 transition-opacity duration-500 ${imagesLoaded ? 'opacity-100' : 'opacity-0 pointer-events-none h-0 overflow-hidden'}`}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}

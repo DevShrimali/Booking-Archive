@@ -16,8 +16,7 @@ export function LetterReveal({ text, className, delay = 0, stagger = 50 }: Lette
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 setIsVisible(true);
-            } else {
-                setIsVisible(false);
+                observer.disconnect(); // Only animate once
             }
         }, { threshold: 0.1 });
 

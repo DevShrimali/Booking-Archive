@@ -8,36 +8,36 @@ const DEALS = [
         title: "Summer in Santorini",
         discount: "20% OFF",
         description: "Book early for the best views in Oia.",
-        image: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
+        image: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?q=80&w=800&auto=format&fit=crop"
     },
     {
         id: 2,
         title: "Kyoto Cherry Blossoms",
         discount: "LIMITED TIME",
         description: "Experience Sakura season like never before.",
-        image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
+        image: "https://images.unsplash.com/photo-1522383150241-6fed06d0c131?q=80&w=800&auto=format&fit=crop"
     },
     {
         id: 3,
         title: "Business Class Upgrade",
         discount: "FREE UPGRADE",
         description: "On select trans-atlantic flights this month.",
-        image: "https://images.unsplash.com/photo-1542296332-2e44a991becc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
+        image: "https://images.unsplash.com/photo-1540339832862-474599807836?q=80&w=800&auto=format&fit=crop"
     }
 ];
 
 export function DealsSection() {
     return (
-        <section className="py-24 bg-white border-b border-gray-50">
+        <section className="py-12 md:py-24 bg-white border-b border-gray-50">
             <div className="container mx-auto px-4 max-w-7xl">
                 <Reveal width="100%">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-4 md:gap-8">
                         <div className="max-w-2xl">
                             <div className="flex items-center gap-2 mb-4">
                                 <Tag className="w-4 h-4 text-blue-600" />
                                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Members Only</span>
                             </div>
-                            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-black leading-[0.9]">
+                            <h2 className="text-xl md:text-3xl font-extrabold tracking-tight text-black leading-[0.9]">
                                 Exclusive <span className="font-serif italic font-normal text-gray-400">Offers</span>
                             </h2>
                         </div>
@@ -71,7 +71,7 @@ export function DealsSection() {
 
                                 {/* Content */}
                                 <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                    <h3 className="text-2xl font-bold text-white mb-2 leading-tight">{deal.title}</h3>
+                                    <h3 className="text-lg font-bold text-white mb-2 leading-tight">{deal.title}</h3>
                                     <p className="text-sm text-gray-300 font-medium line-clamp-2 mb-4 group-hover:text-white transition-colors">
                                         {deal.description}
                                     </p>
@@ -110,17 +110,17 @@ const SERVICES = [
 
 export function ServiceHighlights() {
     return (
-        <section className="py-24 bg-[#FAFAFA]">
+        <section className="py-12 md:py-24 bg-[#FAFAFA]">
             <div className="container mx-auto px-4 max-w-7xl">
                 <Reveal width="100%">
                     {/* Added Header for Consistency */}
-                    <div className="text-center mb-16 max-w-2xl mx-auto">
+                    <div className="text-center mb-8 md:mb-16 max-w-2xl mx-auto">
                         <div className="flex items-center justify-center gap-2 mb-4">
                             <Gem className="w-4 h-4 text-gray-400" />
                             <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Our Services</span>
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-black mb-4">
-                            Curated <span className="font-serif italic font-normal text-gray-400">Experiences</span>
+                        <h2 className="text-xl md:text-3xl font-extrabold tracking-tight text-black mb-4">
+                            Our <span className="font-serif italic font-normal text-gray-400">Services</span>
                         </h2>
                     </div>
                 </Reveal>
@@ -134,7 +134,7 @@ export function ServiceHighlights() {
                                     <service.icon className="w-8 h-8 text-black group-hover:text-white transition-colors duration-300" />
                                 </div>
 
-                                <h3 className="text-xl font-bold text-black mb-4">{service.title}</h3>
+                                <h3 className="text-base font-bold text-black mb-4">{service.title}</h3>
 
                                 <p className="text-gray-500 leading-relaxed text-sm font-medium">
                                     {service.description}
@@ -157,19 +157,19 @@ const TRUST_FACTORS = [
 
 export function TrustSection() {
     return (
-        <section className="py-24 bg-white border-t border-gray-50">
+        <section className="py-12 md:py-24 bg-white border-t border-gray-50">
             <div className="container mx-auto px-4 max-w-7xl">
                 <Reveal width="100%">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-24">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-24">
                         <div className="max-w-md">
                             <div className="flex items-center gap-2 mb-4">
                                 <ShieldCheck className="w-4 h-4 text-green-600" />
                                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Trust & Safety</span>
                             </div>
-                            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-6">
-                                Why <span className="font-serif italic font-normal text-gray-400">Archive?</span>
+                            <h2 className="text-xl md:text-3xl font-extrabold tracking-tight mb-6">
+                                Why Choose <span className="font-serif italic font-normal text-gray-400">Us</span>
                             </h2>
-                            <p className="text-lg text-gray-500 mb-8 leading-relaxed">
+                            <p className="text-sm text-gray-500 mb-8 leading-relaxed">
                                 We believe travel should be seamless, inspiring, and transparent. Our platform is built on trust and efficiency.
                             </p>
                             <button className="px-8 py-4 rounded-full bg-black text-white font-bold text-sm tracking-wider hover:bg-gray-800 transition-colors shadow-lg hover:translate-y-px">
@@ -179,12 +179,12 @@ export function TrustSection() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1 w-full">
                             {TRUST_FACTORS.map((factor, idx) => (
-                                <div key={idx} className="p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100 flex items-start gap-4 h-full">
+                                <div key={idx} className="p-6 md:p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100 flex items-start gap-3 md:gap-4 h-full">
                                     <div className="p-2 bg-white rounded-lg shadow-sm shrink-0">
                                         <factor.icon className="w-5 h-5 text-black" />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-black text-lg mb-1">{factor.title}</h4>
+                                        <h4 className="font-bold text-black text-sm mb-1">{factor.title}</h4>
                                         <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">{factor.desc}</p>
                                     </div>
                                 </div>

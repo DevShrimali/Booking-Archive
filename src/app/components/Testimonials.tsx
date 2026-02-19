@@ -7,7 +7,7 @@ const TESTIMONIALS = [
     id: 1,
     name: "Elena Rodriguez",
     location: "Madrid, Spain",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
     rating: 5,
     text: "Archive Travel curated the most seamless honeymoon for us. The hotel in Amalfi was beyond words.",
     date: "October 2025"
@@ -16,7 +16,7 @@ const TESTIMONIALS = [
     id: 2,
     name: "James Chen",
     location: "San Francisco, USA",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150",
+    avatar: "https://images.unsplash.com/photo-1507009335718-86991a35a507?q=80&w=150&auto=format&fit=crop",
     rating: 5,
     text: "I appreciated the transparency and the 'no hidden fees' promise. Everything was exactly as described.",
     date: "December 2025"
@@ -25,7 +25,7 @@ const TESTIMONIALS = [
     id: 3,
     name: "Sarah Miller",
     location: "London, UK",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop",
     rating: 4.8,
     text: "The 'Exclusive Offers' section is a goldmine. Found a business class upgrade that saved me thousands.",
     date: "January 2026"
@@ -34,7 +34,7 @@ const TESTIMONIALS = [
     id: 4,
     name: "Michael Ross",
     location: "Berlin, Germany",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop",
     rating: 5,
     text: "A truly premium experience from start to finish. The app is intuitive and the support was instant.",
     date: "February 2026"
@@ -43,11 +43,11 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="py-24 bg-gray-50 border-t border-gray-100">
+    <section className="py-12 md:py-24 bg-gray-50 border-t border-gray-100">
       <div className="container mx-auto px-4 max-w-7xl">
         <Reveal width="100%">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-black mb-4">
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="text-xl md:text-3xl font-extrabold tracking-tight text-black mb-4">
               Loved by <span className="font-serif italic font-normal text-gray-400">Travelers</span>
             </h2>
             <div className="flex items-center justify-center gap-2">
@@ -84,7 +84,7 @@ export function Testimonials() {
                 </p>
 
                 <div className="flex items-center gap-3 mt-auto">
-                  <img src={testimonial.avatar} alt={testimonial.name} className="w-10 h-10 rounded-full object-cover border border-gray-200" />
+                  <img src={testimonial.avatar} alt={testimonial.name} loading="lazy" className="w-10 h-10 rounded-full object-cover border border-gray-200" />
                   <div>
                     <h4 className="text-sm font-bold text-black">{testimonial.name}</h4>
                     <p className="text-[10px] text-gray-400 uppercase tracking-wide">{testimonial.location}</p>

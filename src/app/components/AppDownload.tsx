@@ -4,24 +4,24 @@ import { Reveal } from './ui/Reveal';
 
 export function AppDownload() {
     return (
-        <section className="py-24 bg-black text-white relative overflow-hidden">
+        <section className="py-12 md:py-24 bg-black text-white relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-blue-600/20 blur-[120px] rounded-full"></div>
             <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-purple-600/20 blur-[120px] rounded-full"></div>
 
             <div className="container mx-auto px-4 max-w-7xl relative z-10">
                 <Reveal width="100%">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-20">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-20">
 
-                        <div className="flex-1 space-y-8 max-w-2xl">
+                        <div className="flex-1 space-y-6 md:space-y-8 max-w-2xl">
                             <span className="inline-block px-3 py-1 rounded-full border border-white/20 text-xs font-bold uppercase tracking-widest bg-white/5 backdrop-blur-sm">
                                 Mobile App
                             </span>
-                            <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">
+                            <h2 className="text-xl md:text-4xl font-extrabold tracking-tight">
                                 Travel Smart.<br />
                                 <span className="text-gray-400">Wherever you are.</span>
                             </h2>
-                            <p className="text-lg text-gray-400 font-medium max-w-md">
+                            <p className="text-sm text-gray-400 font-medium max-w-md">
                                 Get real-time trip updates, exclusive mobile-only deals, and paperless boarding passes. Keep your journey in your pocket.
                             </p>
 
@@ -42,10 +42,10 @@ export function AppDownload() {
                                 </button>
                             </div>
 
-                            <div className="flex items-center gap-4 pt-8 border-t border-white/10">
+                            <div className="flex items-center gap-4 pt-4 md:pt-8 border-t border-white/10">
                                 <div className="flex -space-x-2">
                                     {[1, 2, 3, 4].map((i) => (
-                                        <div key={i} className="w-8 h-8 rounded-full border-2 border-black bg-gray-800 animate-pulse"></div>
+                                        <div key={i} className="w-8 h-8 rounded-full border-2 border-black" style={{ background: `linear-gradient(135deg, hsl(${i * 60}, 40%, 50%), hsl(${i * 60 + 40}, 40%, 65%))` }}></div>
                                     ))}
                                 </div>
                                 <div className="text-sm font-medium text-gray-400">
@@ -54,9 +54,9 @@ export function AppDownload() {
                             </div>
                         </div>
 
-                        <div className="flex-1 w-full flex items-center justify-center md:justify-end py-12 md:py-0">
+                        <div className="flex-1 w-full flex items-center justify-center md:justify-end py-4 md:py-0">
                             {/* Phone Mockup - Fixed spacing and alignment */}
-                            <div className="w-[320px] h-[640px] bg-gray-900 rounded-[3.5rem] border-8 border-gray-800 shadow-2xl relative overflow-hidden backdrop-blur-xl bg-opacity-80 transform hover:scale-105 transition-transform duration-500">
+                            <div className="w-[220px] h-[440px] md:w-[320px] md:h-[640px] bg-gray-900 rounded-[2.5rem] md:rounded-[3.5rem] border-[6px] md:border-8 border-gray-800 shadow-2xl relative overflow-hidden backdrop-blur-xl bg-opacity-80 transform hover:scale-105 transition-transform duration-500">
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-3xl z-20"></div>
                                 {/* Screen Content */}
                                 <div className="absolute inset-0 bg-white flex flex-col pt-14 p-4 space-y-4">

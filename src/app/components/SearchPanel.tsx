@@ -22,7 +22,7 @@ export function SearchPanel() {
     <section className="w-full bg-[#F8F8F8] py-20 border-b border-gray-200">
       <div className="container mx-auto px-4 md:px-8 max-w-[1440px]">
         <div className="text-center mb-10 md:mb-12">
-           <h2 className="text-3xl font-serif font-bold text-[#111827]">Find Your Next Journey</h2>
+           <h2 className="text-xl font-serif font-bold text-[#111827]">Find Your Next Journey</h2>
            <p className="text-[#4B5563] mt-3 max-w-2xl mx-auto">Search across our comprehensive index of hotels, flights, and transit options.</p>
         </div>
 

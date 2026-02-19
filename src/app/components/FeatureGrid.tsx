@@ -26,11 +26,11 @@ const features = [
 
 export function FeatureGrid() {
   return (
-    <section className="py-20 bg-white border-b border-gray-200">
+    <section className="py-10 md:py-20 bg-white border-b border-gray-200">
       <div className="container mx-auto px-4 md:px-8 max-w-[1440px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-12 text-center">
           {features.map((feature, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -39,13 +39,13 @@ export function FeatureGrid() {
               className="flex flex-col items-center group p-6 rounded-xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100"
             >
               <div className="w-16 h-16 mb-6 overflow-hidden rounded-full bg-gray-50 p-3 border border-gray-100 group-hover:border-blue-100 transition-colors">
-                <img 
-                  src={feature.image} 
-                  alt={feature.title} 
+                <img
+                  src={feature.image}
+                  alt={feature.title}
                   className="w-full h-full object-cover rounded-full opacity-80 group-hover:opacity-100 transition-opacity"
                 />
               </div>
-              <h3 className="text-xl font-serif font-semibold text-[#111827] mb-3">{feature.title}</h3>
+              <h3 className="text-sm font-serif font-semibold text-[#111827] mb-3">{feature.title}</h3>
               <p className="text-[#4B5563] text-sm leading-relaxed max-w-[240px]">{feature.description}</p>
             </motion.div>
           ))}

@@ -13,9 +13,9 @@ const NAVIGATION_ITEMS = {
       { label: 'Apartments', desc: 'City living' },
     ],
     featured: {
-      title: "Amangiri Resort",
-      location: "Utah, USA",
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop"
+      title: "Luxury Retreat",
+      location: "Bali, Indonesia",
+      image: "https://images.unsplash.com/photo-1571896349842-b4dc9e24e110?q=80&w=1200&auto=format&fit=crop"
     }
   },
   Flights: {
@@ -26,9 +26,9 @@ const NAVIGATION_ITEMS = {
       { label: 'Private Jets', desc: 'Exclusive travel' },
     ],
     featured: {
-      title: "First Class",
-      location: "Emirates Experience",
-      image: "https://images.unsplash.com/photo-1436491865332-7a61a1042759?q=80&w=1200&auto=format&fit=crop"
+      title: "Premium Experience",
+      location: "First Class Cabin",
+      image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1200&auto=format&fit=crop"
     }
   },
   Trains: {
@@ -39,9 +39,9 @@ const NAVIGATION_ITEMS = {
       { label: 'Rail Passes', desc: 'Multi-country' },
     ],
     featured: {
-      title: "Glacier Express",
-      location: "Switzerland",
-      image: "https://images.unsplash.com/photo-1479058629457-0adc554b1e54?q=80&w=1200&auto=format&fit=crop"
+      title: "Alpine Express",
+      location: "European Railways",
+      image: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=1200&auto=format&fit=crop"
     }
   }
 };
@@ -98,7 +98,7 @@ export function Navbar() {
           <div className={clsx("w-8 h-8 border border-black rounded-full flex items-center justify-center transition-transform duration-300 ease-out group-hover:rotate-180 shadow-sm", isScrolled ? "bg-black border-transparent" : "bg-white")}>
             <div className={clsx("w-0.5 h-3", isScrolled ? "bg-white" : "bg-black")}></div>
           </div>
-          <span className="font-sans font-bold text-lg tracking-tighter uppercase hidden md:block text-black">
+          <span className="font-sans font-bold text-sm tracking-tighter uppercase hidden md:block text-black">
             Archive<span className="text-gray-400 font-normal">.Travel</span>
           </span>
         </div>
@@ -148,7 +148,7 @@ export function Navbar() {
           </a>
 
           {/* User Profile / Login */}
-          <div className="relative" ref={profileRef}>
+          <div className="relative hidden md:block" ref={profileRef}>
             <button
               onClick={() => setIsProfileOpen(!isProfileOpen)}
               className="flex items-center gap-2 hover:opacity-70 transition-opacity"
@@ -191,21 +191,36 @@ export function Navbar() {
                   <Menu className="w-5 h-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px] overflow-y-auto">
-                <div className="flex flex-col gap-8 mt-8">
-                  <div className="font-sans font-bold text-lg tracking-tighter uppercase text-black">
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] overflow-y-auto p-4 sm:p-6">
+                <div className="flex flex-col gap-8 mt-6">
+                  <div className="font-sans font-bold text-sm sm:text-base tracking-tighter uppercase text-black">
                     Archive<span className="text-gray-400 font-normal">.Travel</span>
+                  </div>
+
+                  {/* User Profile in Mobile Menu */}
+                  <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl min-h-[70px]">
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border border-gray-200 flex-shrink-0">
+                      <User className="w-6 h-6 text-black" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-bold text-sm text-black">Guest User</div>
+                      <div className="text-xs text-gray-500">Welcome back</div>
+                    </div>
                   </div>
 
                   <nav className="flex flex-col gap-6">
                     {Object.keys(NAVIGATION_ITEMS).map((item) => (
-                      <div key={item} className="space-y-3">
-                        <div className="text-sm font-bold uppercase tracking-widest text-black border-b border-gray-100 pb-2">
+                      <div key={item} className="space-y-4">
+                        <div className="text-xs font-bold uppercase tracking-[0.15em] text-black border-b border-gray-100 pb-3">
                           {item}
                         </div>
-                        <div className="flex flex-col gap-2 pl-4">
+                        <div className="flex flex-col gap-3 pl-4">
                           {NAVIGATION_ITEMS[item as keyof typeof NAVIGATION_ITEMS].items.map((link) => (
-                            <a key={link.label} href="#" className="text-sm text-gray-500 hover:text-black transition-colors block py-1">
+                            <a 
+                              key={link.label} 
+                              href="#" 
+                              className="text-sm text-gray-500 hover:text-black hover:bg-gray-50 transition-colors block py-2 px-2 rounded-lg -ml-2 touch-target"
+                            >
                               {link.label}
                             </a>
                           ))}
@@ -213,20 +228,29 @@ export function Navbar() {
                       </div>
                     ))}
 
-                    <div className="space-y-3 pt-4 border-t border-gray-100">
-                      <a href="#" className="block text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-black">
+                    <div className="space-y-4 pt-6 border-t border-gray-100">
+                      <a 
+                        href="#" 
+                        className="block text-sm font-bold uppercase tracking-[0.15em] text-gray-500 hover:text-black py-2 px-2 rounded-lg -ml-2"
+                      >
                         Offers
                       </a>
-                      <a href="#" className="block text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-black">
+                      <a 
+                        href="#" 
+                        className="block text-sm font-bold uppercase tracking-[0.15em] text-gray-500 hover:text-black py-2 px-2 rounded-lg -ml-2"
+                      >
                         Support
                       </a>
-                      <a href="#" className="block text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-black">
+                      <a 
+                        href="#" 
+                        className="block text-sm font-bold uppercase tracking-[0.15em] text-gray-500 hover:text-black py-2 px-2 rounded-lg -ml-2"
+                      >
                         My Trips
                       </a>
                     </div>
 
-                    <div className="pt-4">
-                      <button className="w-full py-3 text-xs font-bold bg-black text-white rounded-lg hover:bg-gray-900 transition-colors tracking-wide uppercase">
+                    <div className="pt-6">
+                      <button className="w-full py-3 text-xs font-bold bg-black text-white rounded-lg hover:bg-gray-900 active:bg-gray-950 transition-colors tracking-wide uppercase touch-target min-h-[48px] flex items-center justify-center">
                         Login / Sign Up
                       </button>
                     </div>
@@ -278,7 +302,7 @@ export function Navbar() {
               {activeMenu && (
                 <div className="text-black space-y-3">
                   <div className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Featured Collection</div>
-                  <div className="text-4xl font-serif italic text-gray-900">{NAVIGATION_ITEMS[activeMenu as keyof typeof NAVIGATION_ITEMS].featured.title}</div>
+                  <div className="text-2xl font-serif italic text-gray-900">{NAVIGATION_ITEMS[activeMenu as keyof typeof NAVIGATION_ITEMS].featured.title}</div>
                   <div className="text-sm text-gray-600 flex items-center gap-2 font-medium">
                     <MapPin className="w-3.5 h-3.5" />
                     {NAVIGATION_ITEMS[activeMenu as keyof typeof NAVIGATION_ITEMS].featured.location}

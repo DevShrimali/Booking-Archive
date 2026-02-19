@@ -25,7 +25,7 @@ const highlights = [
 
 export function HighlightSection() {
   return (
-    <section className="py-20 bg-[#F9F9F9]">
+    <section className="py-12 md:py-20 bg-[#F9F9F9]">
       <div className="container mx-auto px-4 md:px-8">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -36,6 +36,7 @@ export function HighlightSection() {
                 <img
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
 
@@ -49,12 +50,12 @@ export function HighlightSection() {
                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">{item.category}</span>
                   </div>
 
-                  <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-2 leading-tight">
+                  <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-white mb-2 leading-tight">
                     {item.title} <span className="font-serif italic font-normal text-white/90">{item.italicTitle}</span>
                   </h2>
 
                   <div className="flex items-center justify-between mt-4">
-                    <p className="text-white/80 text-sm md:text-base max-w-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                    <p className="text-white/80 text-sm md:text-base max-w-sm md:opacity-0 md:group-hover:opacity-100 md:transform md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-500 delay-100">
                       {item.description}
                     </p>
                     <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-300">

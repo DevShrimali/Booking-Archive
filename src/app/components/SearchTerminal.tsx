@@ -81,11 +81,11 @@ export function SearchTerminal() {
   const isTransport = activeTab === 'Flights' || activeTab === 'Trains';
 
   return (
-    <section className="relative z-30 -mt-16 sm:-mt-24 px-4 pb-12 sm:pb-20">
+    <section className="relative z-30 -mt-16 sm:-mt-24 px-4 pb-6 sm:pb-20">
       <Reveal className="w-full max-w-6xl mx-auto" overflowVisible={true}>
-        <div className="bg-white rounded-3xl sm:rounded-[2.5rem] shadow-xl border border-gray-100 p-6 sm:p-8 relative">
+        <div className="bg-white rounded-3xl sm:rounded-[2.5rem] shadow-xl border border-gray-100 p-5 sm:p-8 relative">
 
-          <div className="flex flex-col gap-8 relative z-10">
+          <div className="flex flex-col gap-4 sm:gap-8 relative z-10">
 
             {/* Tabs with Icons */}
             <div className="flex gap-1 bg-gray-50 p-1 rounded-full w-fit">
@@ -143,7 +143,7 @@ export function SearchTerminal() {
                         }}
                         onFocus={() => setShowOriginDropdown(true)}
                         placeholder="Origin City"
-                        className="w-full bg-transparent font-bold text-base sm:text-lg text-black focus:outline-none placeholder:text-gray-300 truncate"
+                        className="w-full bg-transparent font-bold text-xs sm:text-sm text-black focus:outline-none placeholder:text-gray-300 truncate"
                       />
                     </div>
 
@@ -195,7 +195,7 @@ export function SearchTerminal() {
                       }}
                       onFocus={() => setShowLocationDropdown(true)}
                       placeholder={isTransport ? "Destination" : "City or Airport"}
-                      className="w-full bg-transparent font-bold text-lg text-black focus:outline-none placeholder:text-gray-300 truncate"
+                      className="w-full bg-transparent font-bold text-sm text-black focus:outline-none placeholder:text-gray-300 truncate"
                     />
                   </div>
 
@@ -236,7 +236,7 @@ export function SearchTerminal() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block mb-0.5">Dates</label>
-                    <div className={clsx("font-bold text-lg truncate", dates === "Add Dates" ? "text-gray-300" : "text-black")}>
+                    <div className={clsx("font-bold text-sm truncate", dates === "Add Dates" ? "text-gray-300" : "text-black")}>
                       {dates}
                     </div>
                   </div>
@@ -244,7 +244,7 @@ export function SearchTerminal() {
                   {showDateDropdown && (
                     <div className="absolute top-[110%] left-1/2 -translate-x-1/2 w-[320px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200 p-6" onClick={(e) => e.stopPropagation()}>
                       <div className="flex justify-between items-center mb-6">
-                        <span className="font-bold text-lg">August 2026</span>
+                        <span className="font-bold text-sm">August 2026</span>
                         <div className="flex gap-2">
                           <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"><ArrowRight className="w-4 h-4 rotate-180" /></button>
                           <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"><ArrowRight className="w-4 h-4" /></button>
@@ -297,7 +297,7 @@ export function SearchTerminal() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block mb-0.5">Guests</label>
-                    <div className="font-bold text-lg text-black flex items-center gap-2 truncate">
+                    <div className="font-bold text-sm text-black flex items-center gap-2 truncate">
                       {totalGuests} Guests <ChevronDown className={clsx("w-4 h-4 text-gray-400 transition-transform", showGuestDropdown && "rotate-180")} />
                     </div>
                   </div>
@@ -343,7 +343,7 @@ export function SearchTerminal() {
                 <button
                   onClick={handleSearch}
                   disabled={isSearching}
-                  className="w-full h-full min-h-[86px] bg-black hover:bg-gray-800 text-white rounded-2xl flex items-center justify-center gap-2 font-bold text-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                  className="w-full h-full min-h-[56px] lg:min-h-[86px] bg-black hover:bg-gray-800 text-white rounded-2xl flex items-center justify-center gap-2 font-bold text-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                 >
                   {isSearching ? (
                     <Loader2 className="w-6 h-6 animate-spin" />

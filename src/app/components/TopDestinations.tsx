@@ -7,7 +7,7 @@ const topDestinations = [
         id: 1,
         name: "Santorini",
         country: "Greece",
-        image: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+        image: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?q=80&w=800&auto=format&fit=crop",
         rating: 4.9,
         reviews: 2847,
         description: "Iconic white-washed villages perched on volcanic cliffs.",
@@ -17,7 +17,7 @@ const topDestinations = [
         id: 2,
         name: "Kyoto",
         country: "Japan",
-        image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+        image: "https://images.unsplash.com/photo-1522383150241-6fed06d0c131?q=80&w=800&auto=format&fit=crop",
         rating: 4.8,
         reviews: 3156,
         description: "Ancient temples and traditional tea houses.",
@@ -27,7 +27,7 @@ const topDestinations = [
         id: 3,
         name: "Bali",
         country: "Indonesia",
-        image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+        image: "https://images.unsplash.com/photo-1560526881-721c926e76f6?q=80&w=800&auto=format&fit=crop",
         rating: 4.7,
         reviews: 4521,
         description: "Tropical paradise with lush rice terraces.",
@@ -37,7 +37,7 @@ const topDestinations = [
         id: 4,
         name: "Reykjavik",
         country: "Iceland",
-        image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+        image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=800&auto=format&fit=crop",
         rating: 4.9,
         reviews: 1893,
         description: "Northern lights and dramatic volcanic landscapes.",
@@ -47,18 +47,18 @@ const topDestinations = [
 
 export function TopDestinations() {
     return (
-        <section className="relative py-24 px-4 bg-[#FDFDFD] overflow-hidden">
+        <section className="relative py-12 md:py-24 px-4 bg-[#FDFDFD] overflow-hidden">
             <div className="container mx-auto max-w-7xl">
 
                 {/* Section Header */}
                 <Reveal width="100%">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-4 md:gap-8">
                         <div className="max-w-2xl">
                             <div className="flex items-center gap-3 mb-4">
                                 <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
                                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Curated Selection</span>
                             </div>
-                            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-black leading-[0.9]">
+                            <h2 className="text-xl md:text-3xl font-extrabold tracking-tight text-black leading-[0.9]">
                                 Trending <span className="font-serif italic font-normal text-gray-400">Destinations</span>
                             </h2>
                         </div>
@@ -73,13 +73,13 @@ export function TopDestinations() {
                 </Reveal>
 
                 {/* Destination Cards Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12">
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-6 md:gap-x-4 md:gap-y-12">
                     {topDestinations.map((destination, index) => (
                         <Reveal key={destination.id} delay={index * 100}>
                             <div className="group cursor-pointer">
 
                                 {/* Image Container */}
-                                <div className="relative aspect-[3/4] mb-6 overflow-hidden rounded-[2rem] bg-gray-100">
+                                <div className="relative aspect-[3/4] sm:aspect-[3/4] mb-3 md:mb-6 overflow-hidden rounded-2xl md:rounded-[2rem] bg-gray-100">
                                     <img
                                         src={destination.image}
                                         alt={`${destination.name}, ${destination.country}`}
@@ -98,10 +98,10 @@ export function TopDestinations() {
                                 </div>
 
                                 {/* Content */}
-                                <div className="space-y-3 px-2">
+                                <div className="space-y-1 md:space-y-3 px-1 md:px-2">
                                     <div className="flex justify-between items-start">
                                         <div>
-                                            <h3 className="text-2xl font-bold text-black group-hover:text-blue-600 transition-colors">
+                                            <h3 className="text-xs md:text-sm font-bold text-black group-hover:text-blue-600 transition-colors">
                                                 {destination.name}
                                             </h3>
                                             <div className="flex items-center gap-1.5 text-gray-500 mt-1">
@@ -110,7 +110,7 @@ export function TopDestinations() {
                                             </div>
                                         </div>
                                         <div className="text-right">
-                                            <span className="block text-lg font-bold text-black">{destination.price}</span>
+                                            <span className="block text-xs md:text-sm font-bold text-black">{destination.price}</span>
                                             <span className="text-[10px] text-gray-400 uppercase tracking-wide">/ Night</span>
                                         </div>
                                     </div>

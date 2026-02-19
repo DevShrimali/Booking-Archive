@@ -5,11 +5,11 @@ import { LetterReveal } from './ui/LetterReveal';
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white pt-32 pb-12 overflow-hidden border-t border-white/5">
+    <footer className="bg-black text-white pt-16 sm:pt-32 pb-12 overflow-hidden border-t border-white/5">
       <div className="container mx-auto px-6">
 
-        <div className="mb-24 relative z-10">
-          <h2 className="text-[13vw] font-sans font-extrabold leading-[0.8] tracking-tighter text-white/90 select-none">
+        <div className="mb-12 md:mb-24 relative z-10">
+          <h2 className="text-[11vw] md:text-[13vw] font-sans font-extrabold leading-[0.8] tracking-tighter text-white/90 select-none">
             <div className="overflow-hidden">
               <LetterReveal text="ARCHIVE" className="text-white transform origin-bottom-left" stagger={30} />
             </div>
@@ -25,7 +25,7 @@ export function Footer() {
             <Reveal>
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">Manifesto</h4>
-                <p className="text-gray-400 text-lg leading-relaxed font-serif italic max-w-sm">
+                <p className="text-gray-400 text-sm leading-relaxed font-serif italic max-w-sm">
                   We replace noise with precision. A curated index for the modern traveler who values aesthetic silence and kinetic speed.
                 </p>
               </div>
@@ -73,7 +73,7 @@ export function Footer() {
 
         <Reveal delay={300}>
           <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] font-mono text-gray-600 uppercase tracking-widest">
-            <p>© 2024 Archive Travel Inc. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Archive Travel Inc. All rights reserved.</p>
             <div className="flex gap-8 mt-4 md:mt-0">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>

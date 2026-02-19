@@ -15,13 +15,13 @@ export function Newsletter() {
 
     if (status === 'success') {
         return (
-            <section className="py-24 bg-white border-t border-gray-50 flex flex-col items-center justify-center min-h-[400px]">
+            <section className="py-12 md:py-24 bg-white border-t border-gray-50 flex flex-col items-center justify-center min-h-[300px] md:min-h-[400px]">
                 <Reveal>
                     <div className="text-center space-y-4">
                         <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
                             <Mail className="w-8 h-8 text-green-600" />
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-black">Welcome to Archive.</h2>
+                        <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-black">Welcome to Archive.</h2>
                         <p className="text-gray-500">Check your inbox for your first curated collection.</p>
                         <button
                             onClick={() => { setStatus('idle'); setEmail(''); }}
@@ -42,7 +42,7 @@ export function Newsletter() {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12">
                         {/* Left: Title & Text */}
                         <div className="text-center md:text-left">
-                            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-black mb-1.5">
+                            <h2 className="text-sm md:text-base font-bold tracking-tight text-black mb-1.5">
                                 Join the <span className="font-serif italic font-normal text-gray-400">Archive</span>
                             </h2>
                             <p className="text-xs md:text-sm text-gray-500 max-w-sm">
@@ -51,7 +51,7 @@ export function Newsletter() {
                         </div>
 
                         {/* Right: Minimal Form */}
-                        <form onSubmit={handleSubmit} className="w-full md:w-auto min-w-[320px] flex gap-2">
+                        <form onSubmit={handleSubmit} className="w-full md:w-auto md:min-w-[320px] flex gap-2">
                             <input
                                 type="email"
                                 value={email}
