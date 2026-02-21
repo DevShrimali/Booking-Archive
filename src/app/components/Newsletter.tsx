@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { MailIcon } from './ui/mail-icon';
 import { Reveal } from './ui/Reveal';
 
 export function Newsletter() {
@@ -19,7 +20,7 @@ export function Newsletter() {
                 <Reveal>
                     <div className="text-center space-y-4">
                         <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <Mail className="w-8 h-8 text-green-600" />
+                            <MailIcon size={32} className="text-green-600" />
                         </div>
                         <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-black">Welcome to Archive.</h2>
                         <p className="text-gray-500">Check your inbox for your first curated collection.</p>

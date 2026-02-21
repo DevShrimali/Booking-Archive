@@ -1,6 +1,9 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Menu, Search, User, Globe } from 'lucide-react';
+import { MenuIcon } from './ui/menu-icon';
+import { SearchIcon } from './ui/search-icon';
+import { UserIcon } from './ui/user-icon';
+import { GlobeIcon } from './ui/globe-icon';
 import { Button } from './ui/Button';
 
 export function Header() {
@@ -10,7 +13,7 @@ export function Header() {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-[#111827] flex items-center justify-center rounded-full">
-            <Globe className="w-5 h-5 text-white" />
+            <GlobeIcon size={20} className="text-white" />
           </div>
           <span className="text-xl font-serif font-bold tracking-tight text-[#111827]">
             Archival<span className="font-sans font-light text-[#0055FF]">Index</span>
@@ -28,14 +31,14 @@ export function Header() {
         {/* Actions */}
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" className="hidden md:flex">
-            <Search className="w-5 h-5" />
+            <SearchIcon size={20} />
           </Button>
           <Button variant="outline" size="sm" className="hidden md:flex gap-2">
-            <User className="w-4 h-4" />
+            <UserIcon size={16} />
             <span>Sign In</span>
           </Button>
           <Button variant="ghost" size="icon" className="md:hidden">
-            <Menu className="w-6 h-6" />
+            <MenuIcon size={24} />
           </Button>
         </div>
       </div>

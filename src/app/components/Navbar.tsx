@@ -1,5 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, User, ChevronDown, MapPin, CreditCard, LogOut, Heart, Briefcase, Globe, HelpCircle, Tag } from 'lucide-react';
+import { Briefcase, HelpCircle, Tag } from 'lucide-react';
+import { MenuIcon } from './ui/menu-icon';
+import { UserIcon } from './ui/user-icon';
+import { ChevronDownIcon } from './ui/chevron-down-icon';
+import { MapPinIcon } from './ui/map-pin-icon';
+import { CreditCardIcon } from './ui/credit-card-icon';
+import { LogoutIcon } from './ui/logout-icon';
+import { HeartIcon } from './ui/heart-icon';
+import { GlobeIcon } from './ui/globe-icon';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 import { clsx } from 'clsx';
@@ -15,7 +23,7 @@ const NAVIGATION_ITEMS = {
     featured: {
       title: "Luxury Retreat",
       location: "Bali, Indonesia",
-      image: "https://images.unsplash.com/photo-1571896349842-b4dc9e24e110?q=80&w=1200&auto=format&fit=crop"
+      image: "/images/bali_luxury_retreat.png"
     }
   },
   Flights: {
@@ -28,7 +36,7 @@ const NAVIGATION_ITEMS = {
     featured: {
       title: "Premium Experience",
       location: "First Class Cabin",
-      image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1200&auto=format&fit=crop"
+      image: "/images/first_class_flight.png"
     }
   },
   Trains: {
@@ -41,31 +49,33 @@ const NAVIGATION_ITEMS = {
     featured: {
       title: "Alpine Express",
       location: "European Railways",
-      image: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=1200&auto=format&fit=crop"
+      image: "/images/alpine_express_train.png"
     }
   }
 };
 
 const PROFILE_MENU = [
-  { label: 'My Trips', icon: Briefcase },
-  { label: 'Saved Lists', icon: Heart },
-  { label: 'Account Settings', icon: User },
-  { label: 'Manage Payments', icon: CreditCard },
-  { label: 'Sign Out', icon: LogOut, isDanger: true },
+  { label: 'My Trips', icon: Briefcase, isAnimated: false },
+  { label: 'Saved Lists', icon: HeartIcon, isAnimated: true },
+  { label: 'Account Settings', icon: UserIcon, isAnimated: true },
+  { label: 'Manage Payments', icon: CreditCardIcon, isAnimated: true },
+  { label: 'Sign Out', icon: LogoutIcon, isAnimated: true, isDanger: true },
 ];
 
 export function Navbar() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const navRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      setScrollY(window.scrollY);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -91,12 +101,26 @@ export function Navbar() {
           : "bg-transparent border-transparent py-5"
       )}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between relative z-50">
+      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between relative z-50">
 
         {/* Logo */}
         <div className="group cursor-pointer flex items-center gap-3 shrink-0">
-          <div className={clsx("w-8 h-8 border border-black rounded-full flex items-center justify-center transition-transform duration-300 ease-out group-hover:rotate-180 shadow-sm", isScrolled ? "bg-black border-transparent" : "bg-white")}>
-            <div className={clsx("w-0.5 h-3", isScrolled ? "bg-white" : "bg-black")}></div>
+          <div
+            className={clsx(
+              "w-8 h-8 rounded-full flex items-center justify-center shadow-sm border transition-colors duration-300",
+              isScrolled ? "border-transparent" : "border-transparent bg-blue-950 group-hover:rotate-180"
+            )}
+            style={isScrolled ? {
+              background: `linear-gradient(135deg, hsl(${200 + (scrollY * 0.1) % 50}, 90%, 55%), hsl(${220 + (scrollY * 0.1) % 50}, 90%, 45%))`
+            } : {}}
+          >
+            <div
+              className="w-0.5 h-3 bg-white"
+              style={{
+                transform: `rotate(${scrollY * 1.5}deg)`,
+                transition: 'transform 0.15s ease-out'
+              }}
+            ></div>
           </div>
           <span className="font-sans font-bold text-sm tracking-tighter uppercase hidden md:block text-black">
             Archive<span className="text-gray-400 font-normal">.Travel</span>
@@ -117,10 +141,10 @@ export function Navbar() {
                 )}
               >
                 {item}
-                <ChevronDown className={clsx(
-                  "w-3 h-3 transition-transform duration-300",
+                <ChevronDownIcon size={12} className={clsx(
+                  "transition-transform duration-300",
                   activeMenu === item ? "rotate-180 text-blue-600" : "text-gray-300"
-                )} />
+                )} isAnimated={activeMenu === item} />
               </button>
             ))}
 
@@ -138,14 +162,11 @@ export function Navbar() {
 
           {/* Language / Currency */}
           <button className="hidden lg:flex items-center gap-2 text-gray-500 hover:text-black transition-colors">
-            <Globe className="w-3.5 h-3.5" />
+            <GlobeIcon size={14} />
             <span className="text-[10px] font-bold tracking-wider">EN / USD</span>
           </button>
 
-          {/* My Trips (Desktop) */}
-          <a href="#" className="hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-black transition-colors">
-            My Trips
-          </a>
+
 
           {/* User Profile / Login */}
           <div className="relative hidden md:block" ref={profileRef}>
@@ -154,7 +175,7 @@ export function Navbar() {
               className="flex items-center gap-2 hover:opacity-70 transition-opacity"
             >
               <div className={clsx("w-8 h-8 rounded-full flex items-center justify-center border transition-colors", isScrolled ? "border-gray-200 bg-gray-50" : "border-white/50 bg-white/50")}>
-                <User className="w-4 h-4 text-black" />
+                <UserIcon size={16} className="text-black" />
               </div>
             </button>
 
@@ -176,7 +197,11 @@ export function Navbar() {
                     item.isDanger ? "text-red-500 hover:bg-red-50" : "text-gray-500 hover:text-black hover:bg-gray-50"
                   )}
                 >
-                  <item.icon className="w-3.5 h-3.5" />
+                  {item.isAnimated ? (
+                    <item.icon size={14} />
+                  ) : (
+                    <item.icon className="w-3.5 h-3.5" />
+                  )}
                   {item.label}
                 </button>
               ))}
@@ -188,10 +213,10 @@ export function Navbar() {
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <Menu className="w-5 h-5" />
+                  <MenuIcon size={20} />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px] overflow-y-auto p-4 sm:p-6">
+              <SheetContent side="right" className="w-[85vw] max-w-[350px] sm:w-[400px] sm:max-w-[400px] overflow-y-auto p-4 sm:p-6">
                 <div className="flex flex-col gap-8 mt-6">
                   <div className="font-sans font-bold text-sm sm:text-base tracking-tighter uppercase text-black">
                     Archive<span className="text-gray-400 font-normal">.Travel</span>
@@ -200,11 +225,11 @@ export function Navbar() {
                   {/* User Profile in Mobile Menu */}
                   <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl min-h-[70px]">
                     <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border border-gray-200 flex-shrink-0">
-                      <User className="w-6 h-6 text-black" />
+                      <UserIcon size={24} className="text-black" />
                     </div>
-                    <div className="min-w-0">
-                      <div className="font-bold text-sm text-black">Guest User</div>
-                      <div className="text-xs text-gray-500">Welcome back</div>
+                    <div className="min-w-0 flex-1">
+                      <div className="font-bold text-sm text-black truncate">Guest User</div>
+                      <div className="text-xs text-gray-500 truncate">Welcome back</div>
                     </div>
                   </div>
 
@@ -216,9 +241,9 @@ export function Navbar() {
                         </div>
                         <div className="flex flex-col gap-3 pl-4">
                           {NAVIGATION_ITEMS[item as keyof typeof NAVIGATION_ITEMS].items.map((link) => (
-                            <a 
-                              key={link.label} 
-                              href="#" 
+                            <a
+                              key={link.label}
+                              href="#"
                               className="text-sm text-gray-500 hover:text-black hover:bg-gray-50 transition-colors block py-2 px-2 rounded-lg -ml-2 touch-target"
                             >
                               {link.label}
@@ -229,27 +254,22 @@ export function Navbar() {
                     ))}
 
                     <div className="space-y-4 pt-6 border-t border-gray-100">
-                      <a 
-                        href="#" 
+                      <a
+                        href="#"
                         className="block text-sm font-bold uppercase tracking-[0.15em] text-gray-500 hover:text-black py-2 px-2 rounded-lg -ml-2"
                       >
                         Offers
                       </a>
-                      <a 
-                        href="#" 
+                      <a
+                        href="#"
                         className="block text-sm font-bold uppercase tracking-[0.15em] text-gray-500 hover:text-black py-2 px-2 rounded-lg -ml-2"
                       >
                         Support
                       </a>
-                      <a 
-                        href="#" 
-                        className="block text-sm font-bold uppercase tracking-[0.15em] text-gray-500 hover:text-black py-2 px-2 rounded-lg -ml-2"
-                      >
-                        My Trips
-                      </a>
+
                     </div>
 
-                    <div className="pt-6">
+                    <div className="pt-6 pb-12 sm:pb-6">
                       <button className="w-full py-3 text-xs font-bold bg-black text-white rounded-lg hover:bg-gray-900 active:bg-gray-950 transition-colors tracking-wide uppercase touch-target min-h-[48px] flex items-center justify-center">
                         Login / Sign Up
                       </button>
@@ -278,6 +298,8 @@ export function Navbar() {
               src={NAVIGATION_ITEMS[activeMenu as keyof typeof NAVIGATION_ITEMS].featured.image}
               className="w-full h-full object-cover opacity-90 ml-auto"
               alt=""
+              loading="lazy"
+              onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
             />
             {/* Heavy White Gradient for text readability on the left */}
             <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
@@ -304,7 +326,7 @@ export function Navbar() {
                   <div className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Featured Collection</div>
                   <div className="text-2xl font-serif italic text-gray-900">{NAVIGATION_ITEMS[activeMenu as keyof typeof NAVIGATION_ITEMS].featured.title}</div>
                   <div className="text-sm text-gray-600 flex items-center gap-2 font-medium">
-                    <MapPin className="w-3.5 h-3.5" />
+                    <MapPinIcon size={14} />
                     {NAVIGATION_ITEMS[activeMenu as keyof typeof NAVIGATION_ITEMS].featured.location}
                   </div>
                 </div>

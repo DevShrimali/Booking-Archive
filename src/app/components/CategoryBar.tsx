@@ -1,21 +1,25 @@
 import React, { useRef, useState } from 'react';
-import { Palmtree, Building2, Mountain, Tent, Star, Sparkles, Gem, Coffee, Waves, Plane, Bed } from 'lucide-react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Palmtree, Building2, Mountain, Tent, Gem, Waves, Plane, Bed } from 'lucide-react';
+import { SparklesIcon } from './ui/sparkles-icon';
+import { StarIcon } from './ui/star-icon';
+import { CoffeeIcon } from './ui/coffee-icon';
+import { ChevronLeftIcon } from './ui/chevron-left-icon';
+import { ChevronRightIcon } from './ui/chevron-right-icon';
 import { Reveal } from './ui/Reveal';
 
 const CATEGORIES = [
-    { id: 1, label: 'Trending', icon: Sparkles },
-    { id: 2, label: 'Beachfront', icon: Palmtree },
-    { id: 3, label: 'Iconic Cities', icon: Building2 },
-    { id: 4, label: 'Alpine', icon: Mountain },
-    { id: 5, label: 'Glamping', icon: Tent },
-    { id: 6, label: 'Luxury', icon: Gem },
-    { id: 7, label: 'Bed & Breakfast', icon: Coffee },
-    { id: 8, label: 'Lakeside', icon: Waves },
-    { id: 9, label: 'Design', icon: Star },
-    { id: 10, label: 'Castles', icon: Building2 }, // Using Building2 as placeholder
-    { id: 11, label: 'Islands', icon: Palmtree },
-    { id: 12, label: 'Arctic', icon: Mountain },
+    { id: 1, label: 'Trending', icon: SparklesIcon, isAnimated: true },
+    { id: 2, label: 'Beachfront', icon: Palmtree, isAnimated: false },
+    { id: 3, label: 'Iconic Cities', icon: Building2, isAnimated: false },
+    { id: 4, label: 'Alpine', icon: Mountain, isAnimated: false },
+    { id: 5, label: 'Glamping', icon: Tent, isAnimated: false },
+    { id: 6, label: 'Luxury', icon: Gem, isAnimated: false },
+    { id: 7, label: 'Bed & Breakfast', icon: CoffeeIcon, isAnimated: true },
+    { id: 8, label: 'Lakeside', icon: Waves, isAnimated: false },
+    { id: 9, label: 'Design', icon: StarIcon, isAnimated: true },
+    { id: 10, label: 'Castles', icon: Building2, isAnimated: false }, // Using Building2 as placeholder
+    { id: 11, label: 'Islands', icon: Palmtree, isAnimated: false },
+    { id: 12, label: 'Arctic', icon: Mountain, isAnimated: false },
 ];
 
 export function CategoryBar() {
@@ -52,7 +56,7 @@ export function CategoryBar() {
                         onClick={() => scroll('left')}
                         className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg hover:scale-110 transition-transform ml-2"
                     >
-                        <ChevronLeft className="w-4 h-4" />
+                        <ChevronLeftIcon size={16} />
                     </button>
                 )}
 
@@ -61,7 +65,7 @@ export function CategoryBar() {
                         onClick={() => scroll('right')}
                         className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-lg hover:scale-110 transition-transform mr-2"
                     >
-                        <ChevronRight className="w-4 h-4" />
+                        <ChevronRightIcon size={16} />
                     </button>
                 )}
 
@@ -76,9 +80,16 @@ export function CategoryBar() {
                             onClick={() => setActiveCategory(category.id)}
                             className={`flex flex-col items-center gap-2 min-w-fit group/item transition-opacity duration-200 ${activeCategory === category.id ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`}
                         >
-                            <category.icon
-                                className={`w-6 h-6 transition-transform duration-300 ${activeCategory === category.id ? 'scale-110 stroke-[2.5px]' : 'group-hover/item:scale-110'}`}
-                            />
+                            {category.isAnimated ? (
+                                <category.icon
+                                    size={24}
+                                    className={`transition-transform duration-300 ${activeCategory === category.id ? 'scale-110' : 'group-hover/item:scale-110'}`}
+                                />
+                            ) : (
+                                <category.icon
+                                    className={`w-6 h-6 transition-transform duration-300 ${activeCategory === category.id ? 'scale-110 stroke-[2.5px]' : 'group-hover/item:scale-110'}`}
+                                />
+                            )}
                             <span className={`text-xs font-bold whitespace-nowrap transition-all duration-300 ${activeCategory === category.id ? 'text-black border-b-2 border-black pb-1' : 'text-gray-500 pb-1 border-b-2 border-transparent group-hover/item:border-gray-300'}`}>
                                 {category.label}
                             </span>

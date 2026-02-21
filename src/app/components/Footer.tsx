@@ -1,5 +1,9 @@
 import React from 'react';
-import { ArrowUpRight, Instagram, Twitter, Linkedin, Facebook } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { InstagramIcon } from './ui/instagram-icon';
+import { TwitterIcon } from './ui/twitter-icon';
+import { LinkedInIcon } from './ui/linkedin-icon';
+import { FacebookIcon } from './ui/facebook-icon';
 import { Reveal } from './ui/Reveal';
 import { LetterReveal } from './ui/LetterReveal';
 
@@ -56,13 +60,13 @@ export function Footer() {
                 <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">Social</h4>
                 <div className="flex flex-wrap gap-4">
                   {[
-                    { icon: Instagram, label: "Instagram" },
-                    { icon: Twitter, label: "Twitter" },
-                    { icon: Linkedin, label: "LinkedIn" },
-                    { icon: Facebook, label: "Facebook" }
+                    { icon: InstagramIcon, label: "Instagram" },
+                    { icon: TwitterIcon, label: "Twitter" },
+                    { icon: LinkedInIcon, label: "LinkedIn" },
+                    { icon: FacebookIcon, label: "Facebook" }
                   ].map((social) => (
                     <a key={social.label} href="#" aria-label={social.label} className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-300 group">
-                      <social.icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                      <social.icon size={16} className="group-hover:scale-110 transition-transform" />
                     </a>
                   ))}
                 </div>

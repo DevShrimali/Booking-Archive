@@ -1,5 +1,9 @@
 import React from 'react';
-import { Tag, Plane, Train, Hotel, ShieldCheck, Clock, CreditCard, Sparkles, ArrowRight, Zap, Gem } from 'lucide-react';
+import { Tag, Plane, Train, Hotel, Clock, CreditCard, ArrowRight, Gem } from 'lucide-react';
+import { ShieldCheckIcon } from './ui/shield-check-icon';
+import { SparklesIcon } from './ui/sparkles-icon';
+import { ZapIcon } from './ui/zap-icon';
+import { CreditCardIcon } from './ui/credit-card-icon';
 import { Reveal } from './ui/Reveal';
 
 const DEALS = [
@@ -57,7 +61,9 @@ export function DealsSection() {
                                 <img
                                     src={deal.image}
                                     alt={deal.title}
+                                    loading="lazy"
                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
                                 />
 
                                 {/* Dark Gradient Overlay */}
@@ -149,10 +155,10 @@ export function ServiceHighlights() {
 }
 
 const TRUST_FACTORS = [
-    { icon: Clock, title: "Real-time Availability", desc: "Live inventory updates." },
-    { icon: ShieldCheck, title: "Secure Payments", desc: "Bank-grade encryption." },
-    { icon: Zap, title: "Instant Confirmation", desc: "Zero waiting time." },
-    { icon: Sparkles, title: "Best Price Guarantee", desc: "We match or beat rates." },
+    { icon: Clock, title: "Real-time Availability", desc: "Live inventory updates.", isAnimated: false },
+    { icon: ShieldCheckIcon, title: "Secure Payments", desc: "Bank-grade encryption.", isAnimated: true },
+    { icon: ZapIcon, title: "Instant Confirmation", desc: "Zero waiting time.", isAnimated: true },
+    { icon: SparklesIcon, title: "Best Price Guarantee", desc: "We match or beat rates.", isAnimated: true },
 ];
 
 export function TrustSection() {
@@ -163,7 +169,7 @@ export function TrustSection() {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-24">
                         <div className="max-w-md">
                             <div className="flex items-center gap-2 mb-4">
-                                <ShieldCheck className="w-4 h-4 text-green-600" />
+                                <ShieldCheckIcon size={16} className="text-green-600" />
                                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Trust & Safety</span>
                             </div>
                             <h2 className="text-xl md:text-3xl font-extrabold tracking-tight mb-6">
@@ -181,7 +187,11 @@ export function TrustSection() {
                             {TRUST_FACTORS.map((factor, idx) => (
                                 <div key={idx} className="p-6 md:p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100 flex items-start gap-3 md:gap-4 h-full">
                                     <div className="p-2 bg-white rounded-lg shadow-sm shrink-0">
-                                        <factor.icon className="w-5 h-5 text-black" />
+                                        {factor.isAnimated ? (
+                                            <factor.icon size={20} className="text-black" />
+                                        ) : (
+                                            <factor.icon className="w-5 h-5 text-black" />
+                                        )}
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-black text-sm mb-1">{factor.title}</h4>

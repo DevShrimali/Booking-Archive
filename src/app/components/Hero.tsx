@@ -6,7 +6,7 @@ import { LetterReveal } from './ui/LetterReveal';
 const cards = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800&auto=format&fit=crop",
+    image: "/images/hero_paris.png",
     title: "Paris",
     handle: "@city_lights",
     rotation: "-rotate-6",
@@ -14,7 +14,7 @@ const cards = [
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1540959375944-7049f642e9e1?q=80&w=800&auto=format&fit=crop",
+    image: "/images/hero_tokyo.png",
     title: "Tokyo",
     handle: "@temple_gardens",
     rotation: "-rotate-3",
@@ -22,7 +22,7 @@ const cards = [
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop",
+    image: "/images/hero_swiss_alps.png",
     title: "Swiss Alps",
     handle: "@mountain_peaks",
     rotation: "rotate-0",
@@ -30,7 +30,7 @@ const cards = [
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1599995577558-3c2ca7ac3d37?q=80&w=800&auto=format&fit=crop",
+    image: "/images/hero_amalfi.png",
     title: "Amalfi Coast",
     handle: "@coastal_beauty",
     rotation: "rotate-3",
@@ -38,7 +38,7 @@ const cards = [
   },
   {
     id: 5,
-    image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=800&auto=format&fit=crop",
+    image: "/images/hero_new_york.png",
     title: "New York",
     handle: "@city_energy",
     rotation: "rotate-6",
@@ -130,22 +130,22 @@ export function Hero() {
       <div className="absolute inset-0 pointer-events-none hidden xl:block z-0 overflow-hidden">
         {/* Left Top - Adventure */}
         <div className="absolute top-[13%] left-[4%] w-48 h-64 shadow-2xl rotate-[-6deg] rounded-2xl overflow-hidden border-4 border-white bg-white animate-float z-99" style={{ '--rot': '-6deg', animationDelay: '0s' } as any}>
-          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Travel Adventure" loading="lazy" />
+          <img src="/images/hero_floating_adventure.png" className="w-full h-full object-cover" alt="Travel Adventure" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }} />
         </div>
 
         {/* Left Bottom - Map/Planning */}
         <div className="absolute top-[28%] left-[-1%] w-44 h-42 shadow-xl rotate-[4deg] rounded-xl overflow-hidden border-4 border-white bg-white animate-float " style={{ '--rot': '4deg', animationDelay: '2s' } as any}>
-          <img src="https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Travel Map" loading="lazy" />
+          <img src="/images/hero_floating_map.png" className="w-full h-full object-cover" alt="Travel Map" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }} />
         </div>
 
         {/* Right Top - Relaxation/Resort */}
         <div className="absolute top-[12%] right-[5%] w-56 h-72 shadow-2xl rotate-[5deg] rounded-2xl overflow-hidden border-4 border-white bg-white animate-float z-99" style={{ '--rot': '5deg', animationDelay: '1s' } as any}>
-          <img src="https://images.unsplash.com/photo-1571896349842-b4dc9e24e110?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Luxury Resort" loading="lazy" />
+          <img src="/images/hero_floating_resort.png" className="w-full h-full object-cover" alt="Luxury Resort" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }} />
         </div>
 
         {/* Right Bottom - Urban/Culture */}
         <div className="absolute top-[20%] right-[-1%] w-44 h-60 shadow-xl rotate-[-3deg] rounded-xl overflow-hidden border-4 border-white bg-white animate-float" style={{ '--rot': '-3deg', animationDelay: '3s' } as any}>
-          <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover" alt="Urban Culture" loading="lazy" />
+          <img src="/images/hero_floating_culture.png" className="w-full h-full object-cover" alt="Urban Culture" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }} />
         </div>
       </div>
 
@@ -169,7 +169,7 @@ export function Hero() {
                 text="Extraordinary "
                 delay={400}
                 stagger={50}
-                className="font-serif italic font-normal text-[14vw] sm:text-7xl md:text-9xl text-gray-400 pb-2 md:pb-4"
+                className="font-serif italic font-normal text-[10vw] sm:text-7xl md:text-9xl text-gray-400 pb-2 md:pb-4"
               />
             </div>
           </h1>
@@ -229,6 +229,10 @@ export function Hero() {
                   className="w-full h-full object-cover filter brightness-95 transition-transform duration-500 hover:scale-110"
                   onLoad={handleImageLoad}
                   loading="lazy"
+                  onError={(e) => {
+                    handleImageLoad(); // still count as loaded so UI doesn't hang
+                    (e.target as HTMLImageElement).style.opacity = '0';
+                  }}
                 />
 
                 {/* Floating Handle Pill - with micro-interaction */}

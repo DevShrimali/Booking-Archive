@@ -38,6 +38,7 @@ export function HighlightSection() {
                   alt={item.title}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
                 />
 
                 {/* Gradient Overlay */}

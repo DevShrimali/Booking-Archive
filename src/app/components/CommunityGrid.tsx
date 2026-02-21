@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Reveal } from './ui/Reveal';
-import { ChevronLeft, ChevronRight, MapPin, Star } from 'lucide-react';
+import { ChevronLeftIcon } from './ui/chevron-left-icon';
+import { ChevronRightIcon } from './ui/chevron-right-icon';
+import { MapPinIcon } from './ui/map-pin-icon';
+import { StarIcon } from './ui/star-icon';
 
 const destinations = [
   {
@@ -78,11 +81,11 @@ export function CommunityGrid() {
 
   useEffect(() => {
     if (!isAutoPlay) return;
-    
+
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % destinations.length);
     }, 6000);
-    
+
     return () => clearInterval(interval);
   }, [isAutoPlay]);
 
@@ -130,15 +133,15 @@ export function CommunityGrid() {
               {destinations.map((destination, index) => (
                 <div
                   key={destination.id}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    index === activeIndex ? "opacity-100" : "opacity-0"
-                  }`}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === activeIndex ? "opacity-100" : "opacity-0"
+                    }`}
                 >
                   <img
                     src={destination.image}
                     alt={destination.title}
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
                   />
                   <div className="absolute inset-0 bg-black/35" />
                 </div>
@@ -156,7 +159,7 @@ export function CommunityGrid() {
                       {current.title}
                     </h1>
                     <div className="flex items-center gap-2 text-white text-base md:text-lg font-medium">
-                      <MapPin className="w-5 h-5 flex-shrink-0" />
+                      <MapPinIcon size={20} className="flex-shrink-0" />
                       <span>{current.subtitle}</span>
                     </div>
                   </div>
@@ -164,7 +167,7 @@ export function CommunityGrid() {
                   {/* Rating Card */}
                   <div className="hidden md:flex flex-col items-center bg-white rounded-xl px-4 py-4 shadow-lg min-w-[100px]">
                     <div className="flex items-center gap-1.5 mb-1">
-                      <Star className="w-5 h-5 fill-black text-black" />
+                      <StarIcon size={20} className="text-black" />
                       <span className="text-black font-bold text-lg">{current.rating}</span>
                     </div>
                     <span className="text-gray-600 text-xs font-medium">{current.reviews}</span>
@@ -176,13 +179,13 @@ export function CommunityGrid() {
                   <p className="text-base md:text-lg text-white/95 max-w-3xl leading-relaxed">
                     {current.description}
                   </p>
-                  
+
                   <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                     <div>
                       <p className="text-sm text-white/70 mb-1">Starting from</p>
                       <p className="text-3xl md:text-4xl font-bold text-white">{current.price}</p>
                     </div>
-                    
+
                     <button className="bg-black hover:bg-gray-900 text-white font-bold px-8 py-3.5 rounded-lg transition-all duration-300 w-fit border border-white/20 hover:border-white/40">
                       Explore Now
                     </button>
@@ -196,7 +199,7 @@ export function CommunityGrid() {
                 disabled={isTransitioning}
                 className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-2.5 rounded-lg transition-all duration-300 border border-white/30 hover:border-white/50 disabled:opacity-50 disabled:cursor-not-allowed group"
               >
-                <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+                <ChevronLeftIcon size={24} className="text-white group-hover:scale-110 transition-transform" />
               </button>
 
               <button
@@ -204,7 +207,7 @@ export function CommunityGrid() {
                 disabled={isTransitioning}
                 className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-2.5 rounded-lg transition-all duration-300 border border-white/30 hover:border-white/50 disabled:opacity-50 disabled:cursor-not-allowed group"
               >
-                <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+                <ChevronRightIcon size={24} className="text-white group-hover:scale-110 transition-transform" />
               </button>
             </div>
           </div>
@@ -218,11 +221,10 @@ export function CommunityGrid() {
                 key={index}
                 onClick={() => goToSlide(index)}
                 disabled={isTransitioning}
-                className={`transition-all duration-300 rounded-full disabled:cursor-not-allowed ${
-                  index === activeIndex
-                    ? "bg-black w-8 h-2.5"
-                    : "bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5"
-                }`}
+                className={`transition-all duration-300 rounded-full disabled:cursor-not-allowed ${index === activeIndex
+                  ? "bg-black w-8 h-2.5"
+                  : "bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5"
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
@@ -239,19 +241,19 @@ export function CommunityGrid() {
                   key={destination.id}
                   onClick={() => goToSlide(index)}
                   disabled={isTransitioning}
-                  className={`relative overflow-hidden rounded-xl h-[140px] md:h-[160px] transition-all duration-300 border-2 disabled:cursor-not-allowed group ${
-                    index === activeIndex
-                      ? "border-black shadow-lg"
-                      : "border-gray-200 hover:border-gray-400 hover:shadow-md"
-                  }`}
+                  className={`relative overflow-hidden rounded-xl h-[140px] md:h-[160px] transition-all duration-300 border-2 disabled:cursor-not-allowed group ${index === activeIndex
+                    ? "border-black shadow-lg"
+                    : "border-gray-200 hover:border-gray-400 hover:shadow-md"
+                    }`}
                 >
                   <img
                     src={destination.image}
                     alt={destination.title}
                     className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-300"
                     loading="lazy"
+                    onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
                   />
-                  
+
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all duration-300 flex flex-col justify-end p-3">
                     <p className="text-white font-bold text-xs md:text-sm leading-tight line-clamp-1">{destination.title}</p>
                     <p className="text-gray-200 text-[10px] md:text-xs line-clamp-1">{destination.subtitle}</p>

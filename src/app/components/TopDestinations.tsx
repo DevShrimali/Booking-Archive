@@ -1,5 +1,7 @@
 import React from 'react';
-import { MapPin, Star, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { MapPinIcon } from './ui/map-pin-icon';
+import { StarIcon } from './ui/star-icon';
 import { Reveal } from './ui/Reveal';
 
 const topDestinations = [
@@ -85,6 +87,7 @@ export function TopDestinations() {
                                         alt={`${destination.name}, ${destination.country}`}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         loading="lazy"
+                                        onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
                                     />
 
                                     {/* Hover Overlay */}
@@ -92,7 +95,7 @@ export function TopDestinations() {
 
                                     {/* Floating Badge */}
                                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 shadow-sm">
-                                        <Star className="w-3.5 h-3.5 fill-black text-black" />
+                                        <StarIcon size={14} className="text-black" />
                                         <span className="text-xs font-bold text-black">{destination.rating}</span>
                                     </div>
                                 </div>
@@ -105,7 +108,7 @@ export function TopDestinations() {
                                                 {destination.name}
                                             </h3>
                                             <div className="flex items-center gap-1.5 text-gray-500 mt-1">
-                                                <MapPin className="w-3.5 h-3.5" />
+                                                <MapPinIcon size={14} />
                                                 <span className="text-xs font-medium uppercase tracking-wider">{destination.country}</span>
                                             </div>
                                         </div>

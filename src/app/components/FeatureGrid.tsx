@@ -5,22 +5,22 @@ const features = [
   {
     title: "Real-Time Availability",
     description: "Fetch live availability & pricing directly from providers.",
-    image: "https://images.unsplash.com/photo-1580227974466-ff23cd4750fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYWxlbmRhciUyMGNsb2NrJTIwaWNvbiUyMG1pbmltYWx8ZW58MXx8fHwxNzcxMjI2Nzc3fDA&ixlib=rb-4.1.0&q=80&w=400"
+    image: "https://images.unsplash.com/photo-1580227974466-ff23cd4750fa?q=80&w=400&auto=format&fit=crop"
   },
   {
     title: "Price Comparison",
     description: "Compare travel deals instantly across hundreds of sites.",
-    image: "https://images.unsplash.com/photo-1608186392158-8ce8a086dae0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmljZSUyMHRhZyUyMHBlcmNlbnRhZ2UlMjBpY29uJTIwbWluaW1hbHxlbnwxfHx8fDE3NzEyMjY3Nzh8MA&ixlib=rb-4.1.0&q=80&w=400"
+    image: "https://images.unsplash.com/photo-1608186392158-8ce8a086dae0?q=80&w=400&auto=format&fit=crop"
   },
   {
     title: "Secure Payments",
     description: "Trusted & encrypted checkout for peace of mind.",
-    image: "https://images.unsplash.com/photo-1696013910376-c56f76dd8178?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzaGllbGQlMjBsb2NrJTIwaWNvbiUyMG1pbmltYWx8ZW58MXx8fHwxNzcxMjI2Nzc3fDA&ixlib=rb-4.1.0&q=80&w=400"
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=400&auto=format&fit=crop"
   },
   {
     title: "Personalized Picks",
     description: "Custom suggestions based on your travel history.",
-    image: "https://images.unsplash.com/photo-1533558527255-407147f3ae72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdGFyJTIwcmF0aW5nJTIwaWNvbiUyMG1pbmltYWx8ZW58MXx8fHwxNzcxMjI2Nzc3fDA&ixlib=rb-4.1.0&q=80&w=400"
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop"
   }
 ];
 
@@ -42,7 +42,9 @@ export function FeatureGrid() {
                 <img
                   src={feature.image}
                   alt={feature.title}
+                  loading="lazy"
                   className="w-full h-full object-cover rounded-full opacity-80 group-hover:opacity-100 transition-opacity"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                 />
               </div>
               <h3 className="text-sm font-serif font-semibold text-[#111827] mb-3">{feature.title}</h3>

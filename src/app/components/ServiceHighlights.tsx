@@ -53,6 +53,7 @@ export function ServiceHighlights() {
                     alt={service.title}
                     loading="lazy"
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
                   />
                   {/* Decorative Border */}
                   <div className="absolute inset-4 border border-white/30 z-20 pointer-events-none"></div>

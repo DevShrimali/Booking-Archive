@@ -1,5 +1,6 @@
 import React from 'react';
-import { Star, Quote } from 'lucide-react';
+import { Quote } from 'lucide-react';
+import { StarIcon } from './ui/star-icon';
 import { Reveal } from './ui/Reveal';
 
 const TESTIMONIALS = [
@@ -7,7 +8,7 @@ const TESTIMONIALS = [
     id: 1,
     name: "Elena Rodriguez",
     location: "Madrid, Spain",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop&face",
     rating: 5,
     text: "Archive Travel curated the most seamless honeymoon for us. The hotel in Amalfi was beyond words.",
     date: "October 2025"
@@ -16,7 +17,7 @@ const TESTIMONIALS = [
     id: 2,
     name: "James Chen",
     location: "San Francisco, USA",
-    avatar: "https://images.unsplash.com/photo-1507009335718-86991a35a507?q=80&w=150&auto=format&fit=crop",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop&face",
     rating: 5,
     text: "I appreciated the transparency and the 'no hidden fees' promise. Everything was exactly as described.",
     date: "December 2025"
@@ -25,7 +26,7 @@ const TESTIMONIALS = [
     id: 3,
     name: "Sarah Miller",
     location: "London, UK",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop&face",
     rating: 4.8,
     text: "The 'Exclusive Offers' section is a goldmine. Found a business class upgrade that saved me thousands.",
     date: "January 2026"
@@ -34,7 +35,7 @@ const TESTIMONIALS = [
     id: 4,
     name: "Michael Ross",
     location: "Berlin, Germany",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop&face",
     rating: 5,
     text: "A truly premium experience from start to finish. The app is intuitive and the support was instant.",
     date: "February 2026"
@@ -53,7 +54,7 @@ export function Testimonials() {
             <div className="flex items-center justify-center gap-2">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                  <StarIcon key={i} size={20} className="text-yellow-400" />
                 ))}
               </div>
               <span className="text-sm font-bold text-black">4.9/5 Rating</span>
@@ -72,9 +73,10 @@ export function Testimonials() {
 
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star
+                    <StarIcon
                       key={i}
-                      className={`w-4 h-4 ${i < Math.floor(testimonial.rating) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-200 fill-gray-200'}`}
+                      size={16}
+                      className={`${i < Math.floor(testimonial.rating) ? 'text-yellow-400' : 'text-gray-200'}`}
                     />
                   ))}
                 </div>
@@ -84,7 +86,16 @@ export function Testimonials() {
                 </p>
 
                 <div className="flex items-center gap-3 mt-auto">
-                  <img src={testimonial.avatar} alt={testimonial.name} loading="lazy" className="w-10 h-10 rounded-full object-cover border border-gray-200" />
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    loading="lazy"
+                    className="w-10 h-10 rounded-full object-cover border border-gray-200"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&size=80&background=e5e7eb&color=374151&bold=true`;
+                    }}
+                  />
                   <div>
                     <h4 className="text-sm font-bold text-black">{testimonial.name}</h4>
                     <p className="text-[10px] text-gray-400 uppercase tracking-wide">{testimonial.location}</p>
