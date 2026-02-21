@@ -33,6 +33,8 @@ type TabId = 'Hotels' | 'Flights' | 'Trains';
 // direction: 1 = forward (right), -1 = backward (left)
 const tabOrder: TabId[] = ['Hotels', 'Flights', 'Trains'];
 
+const EASE = [0.32, 0.72, 0, 1] as [number, number, number, number];
+
 const fieldVariants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 32 : -32,
@@ -41,12 +43,12 @@ const fieldVariants = {
   center: {
     x: 0,
     opacity: 1,
-    transition: { duration: 0.32, ease: [0.32, 0.72, 0, 1] },
+    transition: { duration: 0.32, ease: EASE },
   },
   exit: (direction: number) => ({
     x: direction > 0 ? -32 : 32,
     opacity: 0,
-    transition: { duration: 0.22, ease: [0.32, 0.72, 0, 1] },
+    transition: { duration: 0.22, ease: EASE },
   }),
 };
 
@@ -114,7 +116,7 @@ export function SearchTerminal() {
   return (
     <section className="relative z-30 -mt-16 sm:-mt-24 px-4 pb-6 sm:pb-20">
       <Reveal className="w-full max-w-6xl mx-auto" overflowVisible={true}>
-        <div className="bg-white rounded-[2rem] shadow-xl border border-gray-100 p-4 sm:p-8 relative overflow-hidden">
+        <div className="bg-white rounded-[2rem] shadow-xl border border-gray-100 p-4 sm:p-8 relative">
 
           <div className="flex flex-col gap-4 sm:gap-6 relative z-10 w-full">
 
@@ -125,7 +127,7 @@ export function SearchTerminal() {
                   key={tab.id}
                   onClick={() => handleTabChange(tab.id as TabId)}
                   className={clsx(
-                    "relative px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-2 flex-1 sm:flex-none whitespace-nowrap z-10",
+                    "relative px-5 sm:px-6 py-2.5 rounded text-xs sm:text-sm font-bold flex items-center justify-center gap-2 flex-1 sm:flex-none whitespace-nowrap z-10",
                     "transition-colors duration-200",
                     activeTab === tab.id ? "text-white" : "text-gray-500 hover:text-black"
                   )}
@@ -134,7 +136,7 @@ export function SearchTerminal() {
                   {activeTab === tab.id && (
                     <motion.span
                       layoutId="tab-pill"
-                      className="absolute inset-0 bg-black rounded-full shadow-sm"
+                      className="absolute inset-0 bg-black rounded shadow-sm"
                       transition={{ type: 'spring', stiffness: 400, damping: 38 }}
                     />
                   )}
@@ -153,27 +155,28 @@ export function SearchTerminal() {
             {/* ── Form Row ── */}
             <div className="flex flex-col xl:flex-row gap-4 items-stretch w-full">
 
-              {/* Fields container with fixed height to prevent layout jump */}
-              <div className="flex-1 relative overflow-hidden">
-                <AnimatePresence initial={false} mode="wait" custom={direction}>
-                  <motion.div
-                    key={activeTab}
-                    custom={direction}
-                    variants={fieldVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    className={clsx(
-                      "flex flex-col md:flex-row bg-white border border-gray-100 shadow-sm rounded-2xl md:rounded-[2rem] w-full",
-                      "divide-y md:divide-y-0 md:divide-x divide-gray-100"
-                    )}
-                  >
-                    {/* ── Origin Field (Flights / Trains only) ── */}
-                    {isTransport && (
-                      <div
-                        className="relative p-4 md:p-5 flex items-center gap-3 cursor-text min-h-[76px] md:h-[86px] flex-1 hover:bg-gray-50/50 transition-colors rounded-t-2xl md:rounded-none md:rounded-l-[2rem]"
-                        ref={originRef}
-                      >
+              {/* Fields container — layout animated so it expands smoothly */}
+              <motion.div
+                layout
+                className={clsx(
+                  "flex-1 flex flex-col xl:flex-row bg-white border border-gray-100 shadow-sm w-full overflow-hidden",
+                  "divide-y xl:divide-y-0 xl:divide-x divide-gray-100"
+                )}
+              >
+                <AnimatePresence initial={false}>
+                  {/* ── Origin Field (Flights / Trains only) ── */}
+                  {isTransport && (
+                    <motion.div
+                      key="origin"
+                      layout
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: 'auto' }}
+                      exit={{ opacity: 0, width: 0 }}
+                      transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+                      className="relative flex items-center gap-3 cursor-text min-h-[76px] xl:h-[86px] flex-1 hover:bg-gray-50 transition-colors overflow-visible xl:max-w-xs"
+                      ref={originRef}
+                    >
+                      <div className="w-full h-full flex items-center p-4 md:p-5 relative gap-3">
                         <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 shrink-0 hidden sm:flex">
                           <LocateFixed className="w-4 h-4" />
                         </div>
@@ -205,192 +208,194 @@ export function SearchTerminal() {
                           </div>
                         )}
                       </div>
-                    )}
-
-                    {/* ── Destination Field ── */}
-                    <div
-                      className={clsx(
-                        "relative p-4 md:p-5 flex items-center gap-3 cursor-text min-h-[76px] md:h-[86px] flex-1 hover:bg-gray-50/50 transition-colors",
-                        !isTransport && "rounded-t-2xl md:rounded-none md:rounded-l-[2rem]"
-                      )}
-                      ref={locationRef}
-                    >
-                      <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-black shrink-0 hidden sm:flex">
-                        <AnimatePresence mode="wait">
-                          <motion.div
-                            key={activeTab === 'Flights' ? 'flight' : 'pin'}
-                            initial={{ scale: 0.5, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.5, opacity: 0 }}
-                            transition={{ duration: 0.18 }}
-                          >
-                            {activeTab === 'Flights' ? <PlaneLanding className="w-4 h-4" /> : <MapPinIcon size={16} />}
-                          </motion.div>
-                        </AnimatePresence>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <AnimatePresence mode="wait">
-                          <motion.label
-                            key={`dest-label-${activeTab}`}
-                            initial={{ opacity: 0, y: -4 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 4 }}
-                            transition={{ duration: 0.18 }}
-                            className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block mb-0.5"
-                          >
-                            {isTransport ? "To" : "Where to?"}
-                          </motion.label>
-                        </AnimatePresence>
-                        <input
-                          type="text"
-                          value={destination}
-                          onChange={(e) => { setDestination(e.target.value); setShowLocationDropdown(true); }}
-                          onFocus={() => setShowLocationDropdown(true)}
-                          placeholder={isTransport ? "Destination" : "City or Airport"}
-                          className="w-full bg-transparent font-bold text-sm text-black focus:outline-none placeholder:text-gray-300"
-                        />
-                      </div>
-                      {showLocationDropdown && (
-                        <div className="absolute top-[105%] left-0 w-full md:w-[320px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200 p-2">
-                          {filteredDestination.length > 0 ? filteredDestination.map((item) => (
-                            <button
-                              key={item.id}
-                              onClick={() => { setDestination(item.name); setShowLocationDropdown(false); }}
-                              className="w-full px-4 py-3 flex items-center gap-4 hover:bg-gray-50 rounded-2xl transition-colors text-left"
-                            >
-                              <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 shrink-0">
-                                <item.icon size={16} />
-                              </div>
-                              <div>
-                                <div className="font-bold text-sm text-black truncate">{item.name}</div>
-                                <div className="text-xs text-gray-400">{item.type}</div>
-                              </div>
-                            </button>
-                          )) : (
-                            <div className="px-4 py-3 text-sm text-gray-400">No results found</div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* ── Dates Field ── */}
-                    <div
-                      className="relative p-4 md:p-5 flex items-center gap-3 cursor-pointer hover:bg-gray-50/50 min-h-[76px] md:h-[86px] flex-1 transition-colors"
-                      ref={dateRef}
-                      onClick={() => setShowDateDropdown(!showDateDropdown)}
-                    >
-                      <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 shrink-0 hidden sm:flex">
-                        <Calendar className="w-4 h-4" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block mb-0.5">Dates</label>
-                        <div className={clsx("font-bold text-sm truncate", dates === "Add Dates" ? "text-gray-300" : "text-black")}>
-                          {dates}
-                        </div>
-                      </div>
-                      {showDateDropdown && (
-                        <div
-                          className="absolute top-[105%] left-0 sm:left-1/2 sm:-translate-x-1/2 w-full sm:w-[340px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200 p-5 sm:p-6"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <div className="flex justify-between items-center mb-6">
-                            <span className="font-bold text-sm">August 2026</span>
-                            <div className="flex gap-2">
-                              <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"><ArrowRight className="w-4 h-4 rotate-180" /></button>
-                              <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"><ArrowRight className="w-4 h-4" /></button>
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-7 gap-1 text-center mb-2">
-                            {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
-                              <span key={d} className="text-[10px] font-bold text-gray-400">{d}</span>
-                            ))}
-                          </div>
-                          <div className="grid grid-cols-7 gap-1 text-center">
-                            {[...Array(30)].map((_, i) => {
-                              const day = i + 1;
-                              const isSelected = day === 12 || day === 14;
-                              const isRange = day > 12 && day < 14;
-                              return (
-                                <button
-                                  key={i}
-                                  onClick={() => { setDates("Aug 12 - Aug 14"); setShowDateDropdown(false); }}
-                                  className={clsx(
-                                    "w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs sm:text-sm flex items-center justify-center transition-all mx-auto",
-                                    isSelected ? "bg-black text-white font-bold" : "hover:bg-gray-100 text-gray-700",
-                                    isRange ? "bg-gray-100" : ""
-                                  )}
-                                >{day}</button>
-                              );
-                            })}
-                          </div>
-                          <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between gap-4">
-                            <button onClick={() => { setDates("Add Dates"); setShowDateDropdown(false); }} className="text-[10px] sm:text-xs font-bold text-gray-500 hover:text-black uppercase tracking-wide">Clear</button>
-                            <button onClick={() => setShowDateDropdown(false)} className="text-[10px] sm:text-xs font-bold text-black uppercase tracking-wide">Close</button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* ── Guests Field ── */}
-                    <div
-                      className="relative p-4 md:p-5 flex items-center gap-3 cursor-pointer hover:bg-gray-50/50 min-h-[76px] md:h-[86px] flex-1 transition-colors rounded-b-2xl md:rounded-none md:rounded-r-[2rem]"
-                      ref={guestRef}
-                      onClick={() => setShowGuestDropdown(!showGuestDropdown)}
-                    >
-                      <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 shrink-0 hidden sm:flex">
-                        <UsersIcon size={16} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block mb-0.5">Guests</label>
-                        <div className="font-bold text-sm text-black flex items-center justify-between sm:justify-start gap-2 truncate">
-                          <span>{totalGuests} Guests</span>
-                          <ChevronDownIcon size={16} className={clsx("text-gray-400 transition-transform shrink-0", showGuestDropdown && "rotate-180")} isAnimated={showGuestDropdown} />
-                        </div>
-                      </div>
-                      {showGuestDropdown && (
-                        <div className="absolute top-[105%] right-0 w-full md:w-[320px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200 p-5 sm:p-6" onClick={(e) => e.stopPropagation()}>
-                          {[
-                            { label: 'Adults', desc: 'Ages 13 or above', key: 'adults' },
-                            { label: 'Children', desc: 'Ages 2-12', key: 'children' },
-                            { label: 'Pets', desc: 'Traveling service animals?', key: 'pets' }
-                          ].map((type) => (
-                            <div key={type.key} className="flex items-center justify-between mb-6 last:mb-0">
-                              <div>
-                                <div className="font-bold text-sm text-black">{type.label}</div>
-                                <div className="text-xs text-gray-400">{type.desc}</div>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <button
-                                  className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-black hover:text-black disabled:opacity-30 disabled:border-gray-200 transition-colors"
-                                  disabled={guests[type.key as keyof typeof guests] <= 0}
-                                  onClick={() => setGuests(prev => ({ ...prev, [type.key]: prev[type.key as keyof typeof guests] - 1 }))}
-                                >
-                                  <MinusIcon size={12} />
-                                </button>
-                                <span className="w-4 text-center text-sm font-bold">{guests[type.key as keyof typeof guests]}</span>
-                                <button
-                                  className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-black hover:text-black transition-colors"
-                                  onClick={() => setGuests(prev => ({ ...prev, [type.key]: prev[type.key as keyof typeof guests] + 1 }))}
-                                >
-                                  <PlusIcon size={12} />
-                                </button>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                  </motion.div>
+                    </motion.div>
+                  )}
                 </AnimatePresence>
-              </div>
+
+                {/* ── Destination Field ── */}
+                <motion.div
+                  layout
+                  className={clsx(
+                    "relative p-4 md:p-5 flex items-center gap-3 cursor-text min-h-[76px] md:h-[86px] flex-1 hover:bg-gray-50 transition-colors"
+                  )}
+                  ref={locationRef}
+                >
+                  <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-black shrink-0 hidden sm:flex">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activeTab === 'Flights' ? 'flight' : 'pin'}
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.5, opacity: 0 }}
+                        transition={{ duration: 0.18 }}
+                      >
+                        {activeTab === 'Flights' ? <PlaneLanding className="w-4 h-4" /> : <MapPinIcon size={16} />}
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <AnimatePresence mode="wait">
+                      <motion.label
+                        key={`dest-label-${activeTab}`}
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 4 }}
+                        transition={{ duration: 0.18 }}
+                        className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block mb-0.5"
+                      >
+                        {isTransport ? "To" : "Where to?"}
+                      </motion.label>
+                    </AnimatePresence>
+                    <input
+                      type="text"
+                      value={destination}
+                      onChange={(e) => { setDestination(e.target.value); setShowLocationDropdown(true); }}
+                      onFocus={() => setShowLocationDropdown(true)}
+                      placeholder={isTransport ? "Destination" : "City or Airport"}
+                      className="w-full bg-transparent font-bold text-sm text-black focus:outline-none placeholder:text-gray-300"
+                    />
+                  </div>
+                  {showLocationDropdown && (
+                    <div className="absolute top-[105%] left-0 w-full md:w-[320px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200 p-2">
+                      {filteredDestination.length > 0 ? filteredDestination.map((item) => (
+                        <button
+                          key={item.id}
+                          onClick={() => { setDestination(item.name); setShowLocationDropdown(false); }}
+                          className="w-full px-4 py-3 flex items-center gap-4 hover:bg-gray-50 rounded-2xl transition-colors text-left"
+                        >
+                          <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 shrink-0">
+                            <item.icon size={16} />
+                          </div>
+                          <div>
+                            <div className="font-bold text-sm text-black truncate">{item.name}</div>
+                            <div className="text-xs text-gray-400">{item.type}</div>
+                          </div>
+                        </button>
+                      )) : (
+                        <div className="px-4 py-3 text-sm text-gray-400">No results found</div>
+                      )}
+                    </div>
+                  )}
+                </motion.div>
+
+                {/* ── Dates Field ── */}
+                <motion.div
+                  layout
+                  className="relative p-4 md:p-5 flex items-center gap-3 cursor-pointer hover:bg-gray-50 min-h-[76px] md:h-[86px] flex-1 transition-colors"
+                  ref={dateRef}
+                  onClick={() => setShowDateDropdown(!showDateDropdown)}
+                >
+                  <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 shrink-0 hidden sm:flex">
+                    <Calendar className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block mb-0.5">Dates</label>
+                    <div className={clsx("font-bold text-sm truncate", dates === "Add Dates" ? "text-gray-300" : "text-black")}>
+                      {dates}
+                    </div>
+                  </div>
+                  {showDateDropdown && (
+                    <div
+                      className="absolute top-[105%] left-0 sm:left-1/2 sm:-translate-x-1/2 w-full sm:w-[340px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200 p-5 sm:p-6"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="flex justify-between items-center mb-6">
+                        <span className="font-bold text-sm">August 2026</span>
+                        <div className="flex gap-2">
+                          <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"><ArrowRight className="w-4 h-4 rotate-180" /></button>
+                          <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"><ArrowRight className="w-4 h-4" /></button>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-7 gap-1 text-center mb-2">
+                        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
+                          <span key={d} className="text-[10px] font-bold text-gray-400">{d}</span>
+                        ))}
+                      </div>
+                      <div className="grid grid-cols-7 gap-1 text-center">
+                        {[...Array(30)].map((_, i) => {
+                          const day = i + 1;
+                          const isSelected = day === 12 || day === 14;
+                          const isRange = day > 12 && day < 14;
+                          return (
+                            <button
+                              key={i}
+                              onClick={() => { setDates("Aug 12 - Aug 14"); setShowDateDropdown(false); }}
+                              className={clsx(
+                                "w-7 h-7 sm:w-8 sm:h-8 rounded-full type-label flex items-center justify-center transition-all mx-auto",
+                                isSelected ? "bg-black text-white" : "hover:bg-gray-100 text-gray-700",
+                                isRange ? "bg-gray-100" : ""
+                              )}
+                            >{day}</button>
+                          );
+                        })}
+                      </div>
+                      <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between gap-4">
+                        <button onClick={() => { setDates("Add Dates"); setShowDateDropdown(false); }} className="text-[10px] sm:text-xs font-bold text-gray-500 hover:text-black uppercase tracking-wide">Clear</button>
+                        <button onClick={() => setShowDateDropdown(false)} className="text-[10px] sm:text-xs font-bold text-black uppercase tracking-wide">Close</button>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+
+                {/* ── Guests Field ── */}
+                <motion.div
+                  layout
+                  className="relative p-4 md:p-5 flex items-center gap-3 cursor-pointer hover:bg-gray-50 min-h-[76px] md:h-[86px] flex-1 transition-colors"
+                  ref={guestRef}
+                  onClick={() => setShowGuestDropdown(!showGuestDropdown)}
+                >
+                  <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 shrink-0 hidden sm:flex">
+                    <UsersIcon size={16} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <label className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block mb-0.5">Guests</label>
+                    <div className="font-bold text-sm text-black flex items-center justify-between sm:justify-start gap-2 truncate">
+                      <span>{totalGuests} Guests</span>
+                      <ChevronDownIcon size={16} className={clsx("text-gray-400 transition-transform shrink-0", showGuestDropdown && "rotate-180")} isAnimated={showGuestDropdown} />
+                    </div>
+                  </div>
+                  {showGuestDropdown && (
+                    <div className="absolute top-[105%] right-0 w-full md:w-[320px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200 p-5 sm:p-6" onClick={(e) => e.stopPropagation()}>
+                      {[
+                        { label: 'Adults', desc: 'Ages 13 or above', key: 'adults' },
+                        { label: 'Children', desc: 'Ages 2-12', key: 'children' },
+                        { label: 'Pets', desc: 'Traveling service animals?', key: 'pets' }
+                      ].map((type) => (
+                        <div key={type.key} className="flex items-center justify-between mb-6 last:mb-0">
+                          <div>
+                            <div className="font-bold text-sm text-black">{type.label}</div>
+                            <div className="text-xs text-gray-400">{type.desc}</div>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <button
+                              className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-black hover:text-black disabled:opacity-30 disabled:border-gray-200 transition-colors"
+                              disabled={guests[type.key as keyof typeof guests] <= 0}
+                              onClick={() => setGuests(prev => ({ ...prev, [type.key]: prev[type.key as keyof typeof guests] - 1 }))}
+                            >
+                              <MinusIcon size={12} />
+                            </button>
+                            <span className="w-4 text-center text-sm font-bold">{guests[type.key as keyof typeof guests]}</span>
+                            <button
+                              className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-black hover:text-black transition-colors"
+                              onClick={() => setGuests(prev => ({ ...prev, [type.key]: prev[type.key as keyof typeof guests] + 1 }))}
+                            >
+                              <PlusIcon size={12} />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
+
+              </motion.div>
 
               {/* ── Search Button ── */}
               <div className="xl:flex-shrink-0 xl:min-w-[160px] flex">
                 <button
                   onClick={handleSearch}
                   disabled={isSearching}
-                  className="w-full h-[60px] md:h-auto min-h-[60px] xl:min-h-[86px] bg-black hover:bg-gray-800 text-white rounded-2xl md:rounded-[2rem] flex items-center justify-center gap-2 font-bold text-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl shadow-black/10"
+                  className="w-full h-[60px] md:h-auto min-h-[60px] xl:min-h-[86px] bg-black hover:bg-black/80 text-white flex items-center justify-center gap-2 type-sub transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-md rounded-lg xl:rounded-r-lg"
                 >
                   {isSearching ? (
                     <LoaderCircleIcon size={20} isAnimated={true} />
@@ -403,7 +408,6 @@ export function SearchTerminal() {
               </div>
 
             </div>
-
           </div>
         </div>
       </Reveal>

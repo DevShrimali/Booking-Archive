@@ -112,14 +112,14 @@ export function CommunityGrid() {
   const current = destinations[activeIndex];
 
   return (
-    <section className="py-12 md:py-20 bg-white border-t border-gray-100 overflow-hidden">
+    <section className="py-12 md:py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-4 max-w-7xl">
         <Reveal width="100%">
-          <div className="text-center mb-12">
-            <h2 className="text-xl md:text-3xl font-extrabold tracking-tight text-black mb-2">
-              Discover Your Next Adventure
+          <div className="text-center mb-16 max-w-2xl mx-auto">
+            <h2 className="type-display-md tracking-tight text-black flex items-center justify-center gap-3 flex-wrap">
+              DISCOVER YOUR <span className="font-serif italic font-normal text-black/30 lowercase text-[1.1em] transform -translate-y-1">Next Adventure</span>
             </h2>
-            <p className="text-sm text-gray-600 max-w-2xl mx-auto font-medium">
+            <p className="type-body text-black/50 mt-4 max-w-md mx-auto">
               Explore curated destinations that inspire unforgettable journeys.
             </p>
           </div>
@@ -152,14 +152,14 @@ export function CommunityGrid() {
                 {/* Top Section */}
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <div className="inline-block bg-black text-white text-xs font-bold px-3 py-1.5 rounded-lg mb-4">
+                    <div className="inline-block bg-white text-black type-label px-3 py-1.5 rounded mb-4">
                       {current.tag}
                     </div>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 leading-tight">
+                    <h1 className="font-condensed font-bold text-5xl md:text-7xl lg:text-8xl text-white mb-2 leading-[0.9] tracking-tight uppercase drop-shadow-lg">
                       {current.title}
                     </h1>
-                    <div className="flex items-center gap-2 text-white text-base md:text-lg font-medium">
-                      <MapPinIcon size={20} className="flex-shrink-0" />
+                    <div className="flex items-center gap-2 text-white/90 type-sub mt-2">
+                      <MapPinIcon size={16} className="flex-shrink-0" />
                       <span>{current.subtitle}</span>
                     </div>
                   </div>
@@ -175,18 +175,18 @@ export function CommunityGrid() {
                 </div>
 
                 {/* Bottom Section */}
-                <div className="space-y-5">
-                  <p className="text-base md:text-lg text-white/95 max-w-3xl leading-relaxed">
+                <div className="space-y-4 md:space-y-6">
+                  <p className="type-sub text-white/95 max-w-2xl leading-relaxed drop-shadow">
                     {current.description}
                   </p>
 
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-end gap-6">
                     <div>
-                      <p className="text-sm text-white/70 mb-1">Starting from</p>
-                      <p className="text-3xl md:text-4xl font-bold text-white">{current.price}</p>
+                      <p className="type-label text-white/70 mb-1">Starting from</p>
+                      <p className="font-condensed font-bold text-4xl md:text-5xl text-white drop-shadow-md">{current.price.split('/')[0]}<span className="text-xl text-white/60">/night</span></p>
                     </div>
 
-                    <button className="bg-black hover:bg-gray-900 text-white font-bold px-8 py-3.5 rounded-lg transition-all duration-300 w-fit border border-white/20 hover:border-white/40">
+                    <button className="bg-white hover:bg-black hover:text-white text-black type-label px-8 py-4 transition-all duration-300 w-fit">
                       Explore Now
                     </button>
                   </div>
@@ -221,9 +221,9 @@ export function CommunityGrid() {
                 key={index}
                 onClick={() => goToSlide(index)}
                 disabled={isTransitioning}
-                className={`transition-all duration-300 rounded-full disabled:cursor-not-allowed ${index === activeIndex
-                  ? "bg-black w-8 h-2.5"
-                  : "bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5"
+                className={`transition-all duration-300 disabled:cursor-not-allowed ${index === activeIndex
+                  ? "bg-black w-8 h-1"
+                  : "bg-black/20 hover:bg-black/40 w-4 h-1"
                   }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
@@ -260,7 +260,7 @@ export function CommunityGrid() {
                   </div>
 
                   {index === activeIndex && (
-                    <div className="absolute top-2 right-2 bg-black text-white text-[10px] font-bold px-2 py-1 rounded-full">
+                    <div className="absolute top-2 right-2 bg-white text-black type-label px-2 py-1">
                       Current
                     </div>
                   )}

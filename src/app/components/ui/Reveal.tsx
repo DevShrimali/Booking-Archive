@@ -43,6 +43,7 @@ export function Reveal({ children, width = "fit-content", className, delay = 0, 
       className={cn("relative", overflowVisible ? "overflow-visible" : "overflow-hidden", className)}
     >
       <div
+        className="h-full w-full"
         style={{
           transform: isVisible ? "translateY(0)" : "translateY(50px)",
           opacity: isVisible ? 1 : 0,

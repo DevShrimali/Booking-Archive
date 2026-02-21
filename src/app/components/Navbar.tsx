@@ -104,26 +104,26 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between relative z-50">
 
         {/* Logo */}
-        <div className="group cursor-pointer flex items-center gap-3 shrink-0">
+        <div className="group cursor-pointer flex items-center gap-2 shrink-0">
           <div
             className={clsx(
-              "w-8 h-8 rounded-full flex items-center justify-center shadow-sm border transition-colors duration-300",
-              isScrolled ? "border-transparent" : "border-transparent bg-blue-950 group-hover:rotate-180"
+              "w-6 h-6 rounded-full flex items-center justify-center border transition-all duration-300",
+              isScrolled ? "border-black" : "border-black bg-black group-hover:rotate-180"
             )}
-            style={isScrolled ? {
-              background: `linear-gradient(135deg, hsl(${200 + (scrollY * 0.1) % 50}, 90%, 55%), hsl(${220 + (scrollY * 0.1) % 50}, 90%, 45%))`
-            } : {}}
           >
             <div
-              className="w-0.5 h-3 bg-white"
+              className={clsx(
+                "w-[1px] h-3",
+                isScrolled ? "bg-black" : "bg-white"
+              )}
               style={{
-                transform: `rotate(${scrollY * 1.5}deg)`,
-                transition: 'transform 0.15s ease-out'
+                transform: `rotate(${scrollY * 0.5}deg)`,
+                transition: 'transform 0.1s ease-out'
               }}
             ></div>
           </div>
-          <span className="font-sans font-bold text-sm tracking-tighter uppercase hidden md:block text-black">
-            Archive<span className="text-gray-400 font-normal">.Travel</span>
+          <span className="font-condensed font-bold text-xl tracking-wide uppercase hidden md:flex items-center text-black">
+            Archive<span className="font-sans font-normal text-xs ml-1 mt-1 text-black/40 tracking-widest">Travel</span>
           </span>
         </div>
 
@@ -136,22 +136,22 @@ export function Navbar() {
                 key={item}
                 onMouseEnter={() => setActiveMenu(item)}
                 className={clsx(
-                  "text-xs font-bold uppercase tracking-widest flex items-center gap-1 transition-colors duration-200 py-2",
-                  activeMenu === item ? "text-blue-600" : "text-gray-500 hover:text-black"
+                  "type-label group flex items-center gap-1 transition-colors duration-200 py-2",
+                  activeMenu === item ? "text-black" : "text-black/50 hover:text-black"
                 )}
               >
                 {item}
                 <ChevronDownIcon size={12} className={clsx(
                   "transition-transform duration-300",
-                  activeMenu === item ? "rotate-180 text-blue-600" : "text-gray-300"
+                  activeMenu === item ? "rotate-180 text-black" : "text-black/30 group-hover:text-black/50"
                 )} isAnimated={activeMenu === item} />
               </button>
             ))}
 
-            <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-black transition-colors">
+            <a href="#" className="type-label text-black/50 hover:text-black transition-colors">
               Offers
             </a>
-            <a href="#" className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-black transition-colors">
+            <a href="#" className="type-label text-black/50 hover:text-black transition-colors">
               Support
             </a>
           </nav>
@@ -184,7 +184,7 @@ export function Navbar() {
               isProfileOpen ? "opacity-100 visible scale-100" : "opacity-0 invisible scale-95 pointer-events-none"
             )}>
               <div className="p-3 border-b border-gray-50 mb-1">
-                <button className="w-full py-2 text-xs font-bold bg-black text-white rounded-lg hover:bg-gray-900 transition-colors tracking-wide uppercase">
+                <button className="w-full py-2 text-xs font-bold bg-[#0B2545] text-white rounded-lg hover:bg-[#0f3260] transition-colors tracking-wide uppercase">
                   Login / Sign Up
                 </button>
               </div>
@@ -270,7 +270,7 @@ export function Navbar() {
                     </div>
 
                     <div className="pt-6 pb-12 sm:pb-6">
-                      <button className="w-full py-3 text-xs font-bold bg-black text-white rounded-lg hover:bg-gray-900 active:bg-gray-950 transition-colors tracking-wide uppercase touch-target min-h-[48px] flex items-center justify-center">
+                      <button className="w-full py-3 text-xs font-bold bg-[#0B2545] text-white rounded-lg hover:bg-[#0f3260] active:bg-[#091e38] transition-colors tracking-wide uppercase touch-target min-h-[48px] flex items-center justify-center">
                         Login / Sign Up
                       </button>
                     </div>

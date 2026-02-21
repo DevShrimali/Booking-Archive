@@ -88,32 +88,15 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-[80vh] md:min-h-screen w-full flex flex-col items-center justify-center pt-24 md:pt-32 pb-10 md:pb-20 overflow-hidden bg-[#FDFDFD]">
+    <section className="relative min-h-[80vh] md:min-h-screen w-full flex flex-col items-center justify-center pt-24 md:pt-32 pb-10 md:pb-20 overflow-hidden bg-white">
 
-      {/* Aurora Gradient Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Primary Aurora Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 opacity-60" />
-
-        {/* Radial Gradient Overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-200/30 via-transparent to-transparent" />
-
-        {/* Animated Mesh Gradient */}
-        <div className="absolute top-0 -right-1/4 w-1/2 h-1/2 bg-gradient-to-bl from-purple-300/20 via-blue-300/20 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-
-        <div className="absolute bottom-0 -left-1/4 w-1/2 h-1/2 bg-gradient-to-tr from-pink-300/20 via-purple-300/20 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
-
-        {/* Subtle Grid Overlay - Increased visibility */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.08)_1px,transparent_1px)] bg-[size:40px_40px] opacity-60" />
-      </div>
-
-      {/* Background Decor */}
-      <div className="absolute inset-0 grid grid-cols-6 pointer-events-none opacity-[0.03]">
-        <div className="border-r border-black h-full"></div>
-        <div className="border-r border-black h-full"></div>
-        <div className="border-r border-black h-full"></div>
-        <div className="border-r border-black h-full"></div>
-        <div className="border-r border-black h-full"></div>
+      {/* Clean grid background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-[size:48px_48px]" />
+        {/* Top fade */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-white to-transparent" />
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white to-transparent" />
       </div>
 
       {/* Floating Side Images - Decorative Travel Elements */}
@@ -160,16 +143,20 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={100}>
-          <h1 className="font-sans font-extrabold text-[14vw] sm:text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter text-black mb-4 md:mb-6 flex flex-col items-center">
+          <h1 className="mb-4 md:mb-6 flex flex-col items-center">
             <div className="overflow-hidden">
-              <LetterReveal text="DISCOVER " stagger={50} />
+              <LetterReveal
+                text="DISCOVER"
+                stagger={40}
+                className="font-condensed font-black text-[16vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] xl:text-[7vw] leading-[0.88] tracking-tight text-black uppercase"
+              />
             </div>
             <div className="overflow-hidden">
               <LetterReveal
-                text="Extraordinary "
-                delay={400}
-                stagger={50}
-                className="font-serif italic font-normal text-[10vw] sm:text-7xl md:text-9xl text-gray-400 pb-2 md:pb-4"
+                text="Extraordinary"
+                delay={350}
+                stagger={35}
+                className="font-serif italic font-normal text-[10vw] sm:text-[6.5vw] md:text-[6vw] lg:text-[5.5vw] xl:text-[5vw] text-black/30 pb-2 md:pb-4 leading-[1.05]"
               />
             </div>
           </h1>
@@ -181,8 +168,7 @@ export function Hero() {
         {!imagesLoaded && (
           <div className="relative h-[280px] sm:h-[500px] w-full max-w-4xl mx-auto flex justify-center items-center">
             <div className="flex flex-col items-center gap-4">
-              <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
-              <p className="text-sm text-gray-500 font-medium">Loading destinations...</p>
+              <div className="w-10 h-10 border-[2px] border-gray-200 border-t-black rounded-full animate-spin"></div>
             </div>
           </div>
         )}

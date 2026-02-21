@@ -58,13 +58,13 @@ export function Newsletter() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Email address"
-                                className="flex-1 h-10 px-4 bg-gray-50 border border-gray-200 rounded-lg text-black placeholder:text-gray-400 text-sm focus:outline-none focus:border-black/30 focus:bg-white transition-all"
+                                className="flex-1 h-12 px-4 bg-gray-50 border border-gray-200 text-black placeholder:text-gray-400 type-body focus:outline-none focus:border-black focus:bg-white transition-all"
                                 required
                             />
                             <button
                                 type="submit"
                                 disabled={status === 'loading'}
-                                className="h-10 px-5 bg-black text-white rounded-lg font-bold text-[10px] uppercase tracking-wider hover:bg-gray-800 transition-colors flex items-center gap-2 whitespace-nowrap"
+                                className="h-12 px-6 bg-black text-white type-label hover:bg-black/80 transition-colors flex items-center justify-center min-w-[120px]"
                             >
                                 {status === 'loading' ? (
                                     <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>

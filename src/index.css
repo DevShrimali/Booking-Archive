@@ -2,31 +2,94 @@
 @import "./styles/fonts.css";
 
 @theme {
+  /* ── Typefaces ─────────────────────────────────────────── */
   --font-sans: 'Inter', sans-serif;
+  --font-condensed: 'Barlow Condensed', sans-serif;
   --font-serif: 'Playfair Display', serif;
 
-  --color-canvas: #FDFDFD;
-  --color-surface: #F9F9F9;
-  --color-ink: #000000;
-  --color-accent-blue: #2563EB;
-  --color-accent-orange: #F97316;
+  /* ── Strict Type Scale (4 sizes only) ──────────────────── */
+  /* Use these classes: text-label, text-body, text-sub, text-display */
+
+  /* ── Monochromatic Color System ─────────────────────────── */
+  --color-canvas: #FFFFFF;
+  --color-surface: #F5F5F5;
+  --color-border: #E8E8E8;
+  --color-ink: #111111;
+  --color-ink-secondary: #666666;
+  --color-ink-tertiary: #999999;
+  --color-accent: #000000;
+  --color-accent-hover: #1a1a1a;
+
+  /* Legacy tokens (kept for backward compat) */
   --color-archival-grey: #94A3B8;
 
+  /* ── Easing ─────────────────────────────────────────────── */
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* ── Base Reset ────────────────────────────────────────────── */
 body {
   font-family: var(--font-sans);
   background-color: var(--color-canvas);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
-/* Custom scrollbar */
+/* ── Typography Utilities ──────────────────────────────────── */
+/* LABEL — 11px / uppercase / tracking */
+.type-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* BODY — 14px default */
+.type-body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+/* SUB — 18px medium */
+.type-sub {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* DISPLAY — Barlow Condensed, large & bold */
+.type-display {
+  font-family: var(--font-condensed);
+  font-size: clamp(3rem, 10vw, 9rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.type-display-md {
+  font-family: var(--font-condensed);
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* ── Custom Scrollbar ──────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
@@ -34,30 +97,93 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E5E7EB;
-  border-radius: 4px;
+  background: #D4D4D4;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #D1D5DB;
+  background: #A3A3A3;
 }
 
-/* Animation Utilities — bob defined in theme.css */
+/* ── Animation Keyframes ───────────────────────────────────── */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
 
-.animate-pulse-ring {
-  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  to {
+    opacity: 1;
+  }
 }
 
-/* Mobile Touch Target Enhancement - Ensures 48px minimum touch areas */
+@keyframes slide-up {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes line-grow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ── Animation Classes ─────────────────────────────────────── */
+.animate-in {
+  animation: fade-in 0.35s var(--ease-reveal);
+}
+
+.animate-slide-up {
+  animation: slide-up 0.45s var(--ease-reveal) both;
+}
+
+.animate-bob {
+  animation: bob 3.5s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* ── Touch & Scroll Utilities ──────────────────────────────── */
 .touch-target {
   min-height: 48px;
   display: flex;
   align-items: center;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }
 
-/* Horizontal Scroll Container - Smooth scroll with snap */
 .scroll-snap-container {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -67,4 +193,24 @@ body {
 .scroll-snap-child {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+}
+
+/* ── Hover underline micro-interaction ─────────────────────── */
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s var(--ease-smooth);
+}
+
+.hover-underline:hover::after {
+  width: 100%;
 }

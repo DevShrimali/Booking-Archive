@@ -7,9 +7,7 @@ import { TopDestinations } from './components/TopDestinations';
 import { DealsSection, ServiceHighlights, TrustSection } from './components/Features';
 import { HighlightSection } from './components/HighlightSection';
 
-import { CommunityGrid } from './components/CommunityGrid';
 import { Testimonials } from './components/Testimonials';
-import { AppDownload } from './components/AppDownload';
 import { Newsletter } from './components/Newsletter';
 import { Footer } from './components/Footer';
 
@@ -32,31 +30,23 @@ function App() {
         {/* 3. Deals & Offers */}
         <DealsSection />
 
-        {/* 4. Service Highlights */}
-        <ServiceHighlights />
-
-        {/* 5. Trust / Why Choose Us */}
+        {/* 4. Trust / Why Choose Us */}
         <TrustSection />
 
         {/* 6. Featured / Curated (Highlight Section) */}
         <HighlightSection />
 
-
-
-        {/* 7. Inspiration Grid */}
-        <CommunityGrid />
-
-        {/* 8. Testimonials */}
+        {/* 7. Testimonials */}
         <Testimonials />
 
-        {/* 9. App Download */}
-        <AppDownload />
-
-        {/* 10. Newsletter */}
+        {/* 8. Newsletter */}
         <Newsletter />
       </main>
 
-      {/* 11. Footer */}
+      {/* Service Highlights (Minimal) */}
+      <ServiceHighlights />
+
+      {/* Footer */}
       <Footer />
     </div>
   );
