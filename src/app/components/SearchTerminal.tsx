@@ -159,7 +159,7 @@ export function SearchTerminal() {
               <motion.div
                 layout
                 className={clsx(
-                  "flex-1 flex flex-col xl:flex-row bg-white border border-gray-100 shadow-sm w-full overflow-hidden",
+                  "flex-1 flex flex-col xl:flex-row bg-white border border-gray-100 shadow-sm w-full relative z-20",
                   "divide-y xl:divide-y-0 xl:divide-x divide-gray-100"
                 )}
               >
@@ -173,7 +173,10 @@ export function SearchTerminal() {
                       animate={{ opacity: 1, width: 'auto' }}
                       exit={{ opacity: 0, width: 0 }}
                       transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
-                      className="relative flex items-center gap-3 cursor-text min-h-[76px] xl:h-[86px] flex-1 hover:bg-gray-50 transition-colors overflow-visible xl:max-w-xs"
+                      className={clsx(
+                        "relative flex items-center gap-3 cursor-text min-h-[76px] xl:h-[86px] flex-1 hover:bg-gray-50 transition-colors overflow-visible xl:max-w-xs",
+                        showOriginDropdown ? "z-50" : "z-10"
+                      )}
                       ref={originRef}
                     >
                       <div className="w-full h-full flex items-center p-4 md:p-5 relative gap-3">
@@ -216,7 +219,8 @@ export function SearchTerminal() {
                 <motion.div
                   layout
                   className={clsx(
-                    "relative p-4 md:p-5 flex items-center gap-3 cursor-text min-h-[76px] md:h-[86px] flex-1 hover:bg-gray-50 transition-colors"
+                    "relative p-4 md:p-5 flex items-center gap-3 cursor-text min-h-[76px] md:h-[86px] flex-1 hover:bg-gray-50 transition-colors",
+                    showLocationDropdown ? "z-50" : "z-10"
                   )}
                   ref={locationRef}
                 >
@@ -281,7 +285,10 @@ export function SearchTerminal() {
                 {/* ── Dates Field ── */}
                 <motion.div
                   layout
-                  className="relative p-4 md:p-5 flex items-center gap-3 cursor-pointer hover:bg-gray-50 min-h-[76px] md:h-[86px] flex-1 transition-colors"
+                  className={clsx(
+                    "relative p-4 md:p-5 flex items-center gap-3 cursor-pointer hover:bg-gray-50 min-h-[76px] md:h-[86px] flex-1 transition-colors",
+                    showDateDropdown ? "z-50" : "z-10"
+                  )}
                   ref={dateRef}
                   onClick={() => setShowDateDropdown(!showDateDropdown)}
                 >
@@ -340,7 +347,10 @@ export function SearchTerminal() {
                 {/* ── Guests Field ── */}
                 <motion.div
                   layout
-                  className="relative p-4 md:p-5 flex items-center gap-3 cursor-pointer hover:bg-gray-50 min-h-[76px] md:h-[86px] flex-1 transition-colors"
+                  className={clsx(
+                    "relative p-4 md:p-5 flex items-center gap-3 cursor-pointer hover:bg-gray-50 min-h-[76px] md:h-[86px] flex-1 transition-colors",
+                    showGuestDropdown ? "z-50" : "z-10"
+                  )}
                   ref={guestRef}
                   onClick={() => setShowGuestDropdown(!showGuestDropdown)}
                 >

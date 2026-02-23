@@ -139,25 +139,26 @@ export function Testimonials() {
                         "{testimonial.text}"
                       </p>
 
-                      <div className="flex items-center gap-3 mt-auto">
-                        <img
-                          src={testimonial.avatar}
-                          alt={testimonial.name}
-                          loading="lazy"
-                          className="w-10 h-10 rounded-full object-cover border border-gray-200 grayscale"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&size=80&background=e5e7eb&color=374151&bold=true`;
-                          }}
-                        />
-                        <div>
-                          <h4 className="type-sub text-black mb-1">{testimonial.name}</h4>
-                          <p className="type-label text-black/40">{testimonial.location}</p>
+                      <div className="flex items-end justify-between mt-auto">
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={testimonial.avatar}
+                            alt={testimonial.name}
+                            loading="lazy"
+                            className="w-10 h-10 rounded-full object-cover border border-gray-200 grayscale"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&size=80&background=e5e7eb&color=374151&bold=true`;
+                            }}
+                          />
+                          <div>
+                            <h4 className="type-sub text-black mb-1">{testimonial.name}</h4>
+                            <p className="type-label text-black/40">{testimonial.location}</p>
+                          </div>
                         </div>
-                      </div>
-
-                      <div className="absolute bottom-4 right-4 type-label text-black/20">
-                        {testimonial.date}
+                        <div className="type-label text-black/20 mb-0.5">
+                          {testimonial.date}
+                        </div>
                       </div>
 
                     </div>

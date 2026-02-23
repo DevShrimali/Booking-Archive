@@ -56,6 +56,17 @@ const highlights = [
 export function HighlightSection() {
   return (
     <section className="py-12 md:py-20 bg-white border-y border-gray-50 overflow-hidden">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="text-center mb-8 md:mb-16 flex flex-col items-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <span className="w-1.5 h-1.5 bg-black rounded-full"></span>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Featured Curations</span>
+          </div>
+          <h2 className="text-xl md:text-3xl font-extrabold tracking-tight mb-6 text-black">
+            The <span className="font-serif italic font-normal text-gray-400">Collections</span>
+          </h2>
+        </div>
+      </div>
       <style>{`
         @keyframes marquee-highlight {
           0% { transform: translateX(0); }
