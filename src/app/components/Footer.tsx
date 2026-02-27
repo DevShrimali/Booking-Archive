@@ -10,7 +10,7 @@ import { LetterReveal } from './ui/LetterReveal';
 export function Footer() {
   return (
     <footer className="bg-black text-white pt-16 sm:pt-32 pb-12 overflow-hidden border-t border-white/5">
-      <div className="container mx-auto px-4 max-w-[1440px] relative z-10">
+      <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-8 relative z-10">
 
         <div className="mb-12 md:mb-24 relative z-10">
           <h2 className="font-condensed font-black text-[13vw] md:text-[15vw] leading-[0.8] tracking-tight text-white select-none">
@@ -26,7 +26,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-t border-white/10 pt-16">
 
           <div className="md:col-span-4 space-y-8">
-            <Reveal>
+            <Reveal width="100%">
               <div>
                 <h4 className="type-label text-white/40 mb-6">Manifesto</h4>
                 <p className="type-body text-white/60 font-serif italic max-w-sm">
@@ -37,7 +37,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2 md:col-start-7 space-y-8">
-            <Reveal delay={100}>
+            <Reveal delay={100} width="100%">
               <div>
                 <h4 className="type-label text-white/40 mb-6">Directory</h4>
                 <ul className="space-y-4">
@@ -55,7 +55,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-3 space-y-8">
-            <Reveal delay={200}>
+            <Reveal delay={200} width="100%">
               <div>
                 <h4 className="type-label text-white/40 mb-6">Social</h4>
                 <div className="flex flex-wrap gap-4">
@@ -75,7 +75,7 @@ export function Footer() {
           </div>
         </div>
 
-        <Reveal delay={300}>
+        <Reveal delay={300} width="100%">
           <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center type-label text-white/30">
             <p>© {new Date().getFullYear()} Archive Travel Inc. All rights reserved.</p>
             <div className="flex gap-8 mt-4 md:mt-0">

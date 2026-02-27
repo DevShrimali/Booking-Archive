@@ -38,7 +38,7 @@ export function Newsletter() {
 
     return (
         <section className="py-12 bg-white border-t border-gray-100">
-            <div className="container mx-auto px-6">
+            <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-8">
                 <Reveal width="100%">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12">
                         {/* Left: Title & Text */}

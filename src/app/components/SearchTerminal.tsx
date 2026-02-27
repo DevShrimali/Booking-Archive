@@ -121,7 +121,7 @@ export function SearchTerminal() {
           <div className="flex flex-col gap-4 sm:gap-6 relative z-10 w-full">
 
             {/* ── Tabs ── */}
-            <div className="flex gap-1 md:gap-2 bg-gray-50 p-1.5 rounded-full w-full sm:w-fit overflow-x-auto scrollbar-hide relative">
+            <div className="flex gap-1 md:gap-2 bg-gray-50 p-1.5 rounded w-full sm:w-fit overflow-x-auto scrollbar-hide relative">
               {TABS.map((tab) => (
                 <button
                   key={tab.id}

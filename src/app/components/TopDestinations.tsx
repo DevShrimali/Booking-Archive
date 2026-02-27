@@ -9,7 +9,7 @@ const topDestinations = [
         id: 1,
         name: "Santorini",
         country: "Greece",
-        image: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?q=80&w=800&auto=format&fit=crop",
+        image: "/destinations/santorini.png",
         rating: 4.9,
         reviews: 2847,
         description: "Iconic white-washed villages perched on volcanic cliffs.",
@@ -19,7 +19,7 @@ const topDestinations = [
         id: 2,
         name: "Kyoto",
         country: "Japan",
-        image: "https://images.unsplash.com/photo-1522383150241-6fed06d0c131?q=80&w=800&auto=format&fit=crop",
+        image: "/destinations/kyoto.png",
         rating: 4.8,
         reviews: 3156,
         description: "Ancient temples and traditional tea houses.",
@@ -29,7 +29,7 @@ const topDestinations = [
         id: 3,
         name: "Bali",
         country: "Indonesia",
-        image: "https://images.unsplash.com/photo-1560526881-721c926e76f6?q=80&w=800&auto=format&fit=crop",
+        image: "/destinations/bali.png",
         rating: 4.7,
         reviews: 4521,
         description: "Tropical paradise with lush rice terraces.",
@@ -39,18 +39,78 @@ const topDestinations = [
         id: 4,
         name: "Reykjavik",
         country: "Iceland",
-        image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=800&auto=format&fit=crop",
+        image: "/destinations/reykjavik.png",
         rating: 4.9,
         reviews: 1893,
         description: "Northern lights and dramatic volcanic landscapes.",
         price: "$399"
+    },
+    {
+        id: 5,
+        name: "Amalfi Coast",
+        country: "Italy",
+        image: "/destinations/amalfi.png",
+        rating: 4.9,
+        reviews: 4102,
+        description: "Breathtaking coastal cliffs and pastel-colored towns.",
+        price: "$450"
+    },
+    {
+        id: 6,
+        name: "Tulum",
+        country: "Mexico",
+        image: "/destinations/tulum.png",
+        rating: 4.6,
+        reviews: 2154,
+        description: "Ancient ruins meeting pristine Caribbean shores.",
+        price: "$210"
+    },
+    {
+        id: 7,
+        name: "Maldives",
+        country: "Maldives",
+        image: "/destinations/maldives.png",
+        rating: 5.0,
+        reviews: 5321,
+        description: "Overwater bungalows in crystal-clear turquoise waters.",
+        price: "$899"
+    },
+    {
+        id: 8,
+        name: "Marrakech",
+        country: "Morocco",
+        image: "/destinations/marrakech.png",
+        rating: 4.7,
+        reviews: 1982,
+        description: "Vibrant souks, historic palaces, and enchanting riads.",
+        price: "$180"
+    },
+    {
+        id: 9,
+        name: "Cape Town",
+        country: "South Africa",
+        image: "/destinations/capetown.png",
+        rating: 4.8,
+        reviews: 2654,
+        description: "Stunning mountain backdrops and beautiful beaches.",
+        price: "$220"
+    },
+    {
+        id: 10,
+        name: "Swiss Alps",
+        country: "Switzerland",
+        image: "/destinations/swiss.png",
+        rating: 4.9,
+        reviews: 3105,
+        description: "World-class skiing and majestic alpine scenery.",
+        price: "$550"
     }
 ];
 
 export function TopDestinations() {
     return (
-        <section className="relative py-12 md:py-24 px-4 bg-white overflow-hidden">
-            <div className="container mx-auto max-w-7xl">
+        <section className="relative py-12 md:py-24 bg-gray-50 overflow-hidden">
+            <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-8">
 
                 {/* Section Header */}
                 <Reveal width="100%">
@@ -73,61 +133,85 @@ export function TopDestinations() {
                         </div>
                     </div>
                 </Reveal>
+            </div>
 
-                {/* Destination Cards Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-6 md:gap-x-4 md:gap-y-12">
-                    {topDestinations.map((destination, index) => (
-                        <Reveal key={destination.id} delay={index * 100}>
-                            <div className="group cursor-pointer">
+            <style>{`
+                @keyframes marquee-destinations {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-100%); }
+                }
+                .animate-marquee-destinations {
+                    animation: marquee-destinations 50s linear infinite;
+                }
+                .carousel-container:has(.group:hover) .animate-marquee-destinations {
+                    animation-play-state: paused;
+                }
+            `}</style>
 
-                                {/* Image Container */}
-                                <div className="relative aspect-[3/4] sm:aspect-[3/4] mb-4 overflow-hidden rounded bg-gray-100">
-                                    <img
-                                        src={destination.image}
-                                        alt={`${destination.name}, ${destination.country}`}
-                                        className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-smooth)] group-hover:scale-105 filter grayscale-[20%]"
-                                        loading="lazy"
-                                        onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
-                                    />
+            <div className="w-full">
+                <div
+                    className="flex overflow-hidden carousel-container w-full pb-12 pt-4"
+                    style={{
+                        maskImage: 'linear-gradient(to right, transparent, black 10vw, black calc(100% - 10vw), transparent)',
+                        WebkitMaskImage: 'linear-gradient(to right, transparent, black 10vw, black calc(100% - 10vw), transparent)'
+                    }}
+                >
+                    {[1, 2].map((trackIdx) => (
+                        <div key={trackIdx} className="flex gap-3 md:gap-4 pr-3 md:pr-4 animate-marquee-destinations flex-shrink-0">
+                            {topDestinations.map((destination, index) => (
+                                <div key={`${trackIdx}-${destination.id}`} className="flex-shrink-0 w-[42vw] sm:w-[27vw] md:w-[15vw] lg:w-[12vw]">
+                                    <Reveal delay={(index % 4) * 100} width="100%">
+                                        <div className="group cursor-pointer">
+                                            {/* Image Container */}
+                                            <div className="relative aspect-[3/4] mb-4 overflow-hidden rounded bg-gray-100">
+                                                <img
+                                                    src={destination.image}
+                                                    alt={`${destination.name}, ${destination.country}`}
+                                                    className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-smooth)] group-hover:scale-105 filter grayscale-[20%]"
+                                                    loading="lazy"
+                                                    onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
+                                                />
 
-                                    {/* Hover Overlay */}
-                                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />
+                                                {/* Hover Overlay */}
+                                                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />
 
-                                    {/* Floating Badge */}
-                                    <div className="absolute top-4 right-4 bg-white px-3 py-1.5 rounded-full flex items-center gap-1.5 transform translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                                        <StarIcon size={12} className="text-black" />
-                                        <span className="type-label text-black mt-px">{destination.rating}</span>
-                                    </div>
-                                </div>
-
-                                {/* Content */}
-                                <div className="space-y-3 px-1">
-                                    <div className="flex justify-between items-start">
-                                        <div>
-                                            <h3 className="type-sub text-black group-hover:underline decoration-1 underline-offset-4 decoration-black/30 transition-all">
-                                                {destination.name}
-                                            </h3>
-                                            <div className="flex items-center gap-1.5 text-black/50 mt-1">
-                                                <MapPinIcon size={12} className="opacity-70" />
-                                                <span className="type-label">{destination.country}</span>
+                                                {/* Floating Badge */}
+                                                <div className="absolute top-4 right-4 bg-white px-3 py-1.5 rounded-full flex items-center gap-1.5 transform translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                                                    <StarIcon size={12} className="text-black" />
+                                                    <span className="type-label text-black mt-px">{destination.rating}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="text-right mt-1">
-                                            <span className="block type-sub text-black">{destination.price}</span>
-                                            <span className="type-label text-black/40">/ Night</span>
-                                        </div>
-                                    </div>
 
-                                    <p className="type-body text-black/60 font-serif italic line-clamp-2 pr-6">
-                                        {destination.description}
-                                    </p>
+                                            {/* Content */}
+                                            <div className="space-y-3 px-1">
+                                                <div className="flex justify-between items-start">
+                                                    <div>
+                                                        <h3 className="type-sub text-black group-hover:underline decoration-1 underline-offset-4 decoration-black/30 transition-all">
+                                                            {destination.name}
+                                                        </h3>
+                                                        <div className="flex items-center gap-1.5 text-black/50 mt-1">
+                                                            <MapPinIcon size={12} className="opacity-70" />
+                                                            <span className="type-label">{destination.country}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="text-right mt-1">
+                                                        <span className="block type-sub text-black">{destination.price}</span>
+                                                        <span className="type-label text-black/40">/ Night</span>
+                                                    </div>
+                                                </div>
+
+                                                <p className="type-body text-black/60 font-serif italic line-clamp-2 pr-6">
+                                                    {destination.description}
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                    </Reveal>
                                 </div>
-
-                            </div>
-                        </Reveal>
+                            ))}
+                        </div>
                     ))}
                 </div>
-
             </div>
         </section>
     );

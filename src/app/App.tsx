@@ -4,6 +4,7 @@ import { Hero } from './components/Hero';
 import { SearchTerminal } from './components/SearchTerminal';
 import { CategoryBar } from './components/CategoryBar';
 import { TopDestinations } from './components/TopDestinations';
+import { TopRecommendations } from './components/TopRecommendations';
 import { DealsSection, ServiceHighlights, TrustSection } from './components/Features';
 import { HighlightSection } from './components/HighlightSection';
 
@@ -30,8 +31,10 @@ function App() {
         {/* 3. Deals & Offers */}
         <DealsSection />
 
-        {/* 4. Trust / Why Choose Us */}
-        <TrustSection />
+        {/* 5. Handpicked Top Recommendations */}
+        <div className="mt-12 md:mt-0">
+          <TopRecommendations />
+        </div>
 
         {/* 6. Featured / Curated (Highlight Section) */}
         <HighlightSection />
@@ -39,12 +42,15 @@ function App() {
         {/* 7. Testimonials */}
         <Testimonials />
 
+        {/* 4. Trust / Why Choose Us */}
+        <TrustSection />
+
+        {/* Service Highlights (Minimal) */}
+        <ServiceHighlights />
+
         {/* 8. Newsletter */}
         <Newsletter />
       </main>
-
-      {/* Service Highlights (Minimal) */}
-      <ServiceHighlights />
 
       {/* Footer */}
       <Footer />

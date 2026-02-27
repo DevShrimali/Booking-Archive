@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Briefcase, HelpCircle, Tag } from 'lucide-react';
+import { Briefcase, HelpCircle, Tag, ArrowRight } from 'lucide-react';
 import { MenuIcon } from './ui/menu-icon';
 import { UserIcon } from './ui/user-icon';
 import { ChevronDownIcon } from './ui/chevron-down-icon';
@@ -23,7 +23,7 @@ const NAVIGATION_ITEMS = {
     featured: {
       title: "Luxury Retreat",
       location: "Bali, Indonesia",
-      image: "/images/bali_luxury_retreat.png"
+      image: "/destinations/bali.png"
     }
   },
   Flights: {
@@ -36,7 +36,7 @@ const NAVIGATION_ITEMS = {
     featured: {
       title: "Premium Experience",
       location: "First Class Cabin",
-      image: "/images/first_class_flight.png"
+      image: "/destinations/amalfi.png"
     }
   },
   Trains: {
@@ -49,7 +49,7 @@ const NAVIGATION_ITEMS = {
     featured: {
       title: "Alpine Express",
       location: "European Railways",
-      image: "/images/alpine_express_train.png"
+      image: "/destinations/swiss.png"
     }
   }
 };
@@ -132,27 +132,38 @@ export function Navbar() {
           <nav className="flex items-center gap-8">
             {/* Mega Menu Items */}
             {Object.keys(NAVIGATION_ITEMS).map((item) => (
-              <button
+              <div
                 key={item}
+                className="relative flex flex-col items-center group cursor-pointer"
                 onMouseEnter={() => setActiveMenu(item)}
-                className={clsx(
-                  "type-label group flex items-center gap-1 transition-colors duration-200 py-2",
-                  activeMenu === item ? "text-black" : "text-black/50 hover:text-black"
-                )}
               >
-                {item}
-                <ChevronDownIcon size={12} className={clsx(
-                  "transition-transform duration-300",
-                  activeMenu === item ? "rotate-180 text-black" : "text-black/30 group-hover:text-black/50"
-                )} isAnimated={activeMenu === item} />
-              </button>
+                <div
+                  className={clsx(
+                    "flex items-center gap-1.5 transition-colors duration-200 py-2 text-[13px] font-bold tracking-wide uppercase",
+                    activeMenu === item ? "text-black" : "text-black/60 hover:text-black"
+                  )}
+                >
+                  {item}
+                  <ChevronDownIcon size={14} className={clsx(
+                    "transition-transform duration-300",
+                    activeMenu === item ? "rotate-180 text-black" : "text-gray-400"
+                  )} isAnimated={activeMenu === item} />
+                </div>
+                {/* Active Indicator Underline */}
+                <div className={clsx(
+                  "absolute -bottom-1 h-[2px] bg-black transition-all duration-300 ease-out",
+                  activeMenu === item ? "w-full opacity-100" : "w-0 opacity-0"
+                )} />
+              </div>
             ))}
 
-            <a href="#" className="type-label text-black/50 hover:text-black transition-colors">
+            <a href="#" className="relative group text-[13px] font-bold tracking-wide uppercase text-black/60 hover:text-black transition-colors duration-200 py-2 flex flex-col items-center">
               Offers
+              <div className="absolute -bottom-1 w-0 h-[2px] bg-black group-hover:w-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out" />
             </a>
-            <a href="#" className="type-label text-black/50 hover:text-black transition-colors">
+            <a href="#" className="relative group text-[13px] font-bold tracking-wide uppercase text-black/60 hover:text-black transition-colors duration-200 py-2 flex flex-col items-center">
               Support
+              <div className="absolute -bottom-1 w-0 h-[2px] bg-black group-hover:w-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out" />
             </a>
           </nav>
         </div>
@@ -312,9 +323,12 @@ export function Navbar() {
             {/* Links Section */}
             <div className="col-span-12 md:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
               {activeMenu && NAVIGATION_ITEMS[activeMenu as keyof typeof NAVIGATION_ITEMS].items.map((link) => (
-                <a key={link.label} href="#" className="group block space-y-1.5">
-                  <div className="font-bold text-sm text-black group-hover:text-blue-600 transition-colors tracking-wide">{link.label}</div>
-                  <div className="text-xs text-gray-500 font-medium group-hover:text-gray-800 leading-relaxed">{link.desc}</div>
+                <a key={link.label} href="#" className="group block space-y-1.5 p-3 -m-3 rounded-xl hover:bg-gray-50 transition-all duration-300 active:scale-95 focus:outline-none focus:ring-2 focus:ring-black/5">
+                  <div className="font-bold text-sm text-black group-hover:text-black transition-colors tracking-wide flex items-center gap-2">
+                    {link.label}
+                    <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                  </div>
+                  <div className="text-xs text-gray-500 font-medium group-hover:text-gray-700 leading-relaxed">{link.desc}</div>
                 </a>
               ))}
             </div>

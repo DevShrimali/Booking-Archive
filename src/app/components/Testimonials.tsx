@@ -80,7 +80,7 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="py-12 md:py-24 bg-white border-t border-gray-100 overflow-hidden">
+    <section className="py-12 md:py-24 bg-gray-50 border-t border-gray-100 overflow-hidden">
       <style>{`
         @keyframes marquee-test {
           0% { transform: translateX(0); }
@@ -94,7 +94,7 @@ export function Testimonials() {
         }
       `}</style>
       <div className="w-full">
-        <div className="container mx-auto px-4 max-w-7xl">
+        <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-8">
           <div className="text-center mb-8 md:mb-16 flex flex-col items-center">
             <div className="flex items-center justify-center gap-2 mb-4">
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Testimonials</span>
@@ -114,13 +114,19 @@ export function Testimonials() {
           </div>
         </div>
 
-        <div className="flex overflow-hidden carousel-container w-full pb-12 pt-4">
+        <div
+          className="flex overflow-hidden carousel-container w-full pb-12 pt-4"
+          style={{
+            maskImage: 'linear-gradient(to right, transparent, black 10vw, black calc(100% - 10vw), transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10vw, black calc(100% - 10vw), transparent)'
+          }}
+        >
           {[1, 2].map((trackIdx) => (
             <div key={trackIdx} className="flex gap-4 md:gap-6 pr-4 md:pr-6 animate-marquee-test flex-shrink-0">
               {TESTIMONIALS.map((testimonial, idx) => (
                 <div key={`${trackIdx}-${testimonial.id}`} className="flex-shrink-0 w-[70vw] md:w-[42vw] lg:w-[22vw] group">
                   <Reveal delay={(idx % 4) * 100} className="h-full">
-                    <div className="bg-gray-50 p-6 md:p-8 rounded border border-gray-100 h-full flex flex-col relative overflow-hidden">
+                    <div className="bg-white p-6 md:p-8 rounded border border-gray-100 shadow-sm h-full flex flex-col relative overflow-hidden">
 
                       {/* Quote Icon BG */}
                       <Quote className="absolute top-4 right-4 w-12 h-12 text-black/5 rotate-180" />

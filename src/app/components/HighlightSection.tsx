@@ -56,7 +56,7 @@ const highlights = [
 export function HighlightSection() {
   return (
     <section className="py-12 md:py-20 bg-white border-y border-gray-50 overflow-hidden">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-8">
         <div className="text-center mb-8 md:mb-16 flex flex-col items-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="w-1.5 h-1.5 bg-black rounded-full"></span>
@@ -81,11 +81,17 @@ export function HighlightSection() {
       `}</style>
       <div className="w-full">
         {/* Carousel Container */}
-        <div className="flex overflow-hidden carousel-container w-full pb-12 pt-4">
+        <div
+          className="flex overflow-hidden carousel-container w-full pb-12 pt-4"
+          style={{
+            maskImage: 'linear-gradient(to right, transparent, black 10vw, black calc(100% - 10vw), transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10vw, black calc(100% - 10vw), transparent)'
+          }}
+        >
           {[1, 2].map((trackIdx) => (
             <div key={trackIdx} className="flex gap-4 md:gap-6 pr-4 md:pr-6 animate-marquee-highlight flex-shrink-0">
               {highlights.map((item, index) => (
-                <div key={`${trackIdx}-${item.id}`} className="flex-shrink-0 w-[82vw] md:w-[42vw]">
+                <div key={`${trackIdx}-${item.id}`} className="flex-shrink-0 w-[58vw] md:w-[30vw]">
                   <Reveal delay={(index % 3) * 100} width="100%">
                     <div className="relative group overflow-hidden rounded bg-gray-100 aspect-[4/3] md:aspect-[16/10] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-700 hover:scale-[1.02]">
                       {/* Image */}
